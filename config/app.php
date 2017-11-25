@@ -176,6 +176,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        Morilog\Jalali\JalaliServiceProvider::class,
 
     ],
 
@@ -227,6 +228,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'DataTable' => App\Classes\DataTable::class,
         'DataTable2' => App\Classes\DataTable2::class,
+        'Modal' => App\Classes\Modal::class,
+        'jDate' => Morilog\Jalali\Facades\jDate::class,
 
     ],
 

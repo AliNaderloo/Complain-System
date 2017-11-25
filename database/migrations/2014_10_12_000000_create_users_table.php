@@ -15,9 +15,14 @@ class CreateUsersTable extends Migration
     {
         Schema::create('tbl_users', function (Blueprint $table) {
             $table->increments('fld_Id');
+            $table->string('fld_Username')->unique();
             $table->string('fld_Name');
-            $table->string('fld_Token');
-            $table->dateTime('fld_Last_Login'); 
+            $table->string('fld_Password');
+            $table->string('fld_Ip')->nullable();
+            $table->string('fld_Browser')->nullable();
+            $table->dateTime('fld_Last_Login')->nullable(); 
+            $table->rememberToken();
+            $table->timestamps();
         });
     }
 

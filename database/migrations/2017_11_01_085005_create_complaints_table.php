@@ -17,8 +17,9 @@ class CreateComplaintsTable extends Migration
             $table->increments('fld_Id');
             $table->integer('fld_Subject')->index();
             $table->string('fld_Consignment',17);
-            $table->string('fld_Description');
+            $table->longText('fld_Description');
             $table->integer('fld_Level');
+            $table->timestamps();
         });
     }
 
