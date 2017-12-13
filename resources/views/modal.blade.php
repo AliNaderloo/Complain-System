@@ -6,16 +6,18 @@
       @foreach ($Modal->modalFields as $field) 
       @if (!isset($field['visible']) || $field['visible']==true)
       @if ($field['type']=="select")
-      <select  name="{{$field['name']}}" >
+      <select  name="{{$field['name']}}">
          @foreach ($field['values'] as $option) 
          <option value="{{$option['value']}}">{{$option['text']}}</option>
          @endforeach
       </select>
+      @elseif ($field['type']=="checkbox" || $field['type']=="radio")
+            <div> <input type="{{$field['type']}}" @if (isset($field['placeholder'])) placeholder="{{$field['placeholder']}}" @endif name="{{$field['name']}}" @if (isset($field['value'])) value="{{$field['value']}}" @endif >@if (isset($field['text'])) {{$field['text']}} @endif </div>
       @else
-      <input type="{{$field['type']}}" placeholder="{{$field['placeholder']}}" name="{{$field['name']}}" @if (isset($field['value'])) value="{{$field['value']}}" @endif>
+      <input type="{{$field['type']}}" @if (isset($field['placeholder'])) placeholder="{{$field['placeholder']}}" @endif name="{{$field['name']}}" @if (isset($field['value'])) value="{{$field['value']}}" @endif > 
       @endif
       @else
-      <input type="{{$field['type']}}" style="display: none;" placeholder="{{$field['placeholder']}}" name="{{$field['name']}}" @if (isset($field['value'])) value="{{$field['value']}}" @endif>
+      <input type="{{$field['type']}}" style="display: none;" @if (isset($field['placeholder'])) placeholder="{{$field['placeholder']}}" @endif name="{{$field['name']}}" @if (isset($field['value'])) value="{{$field['value']}}" @endif > 
       @endif
       @endforeach
    </div>

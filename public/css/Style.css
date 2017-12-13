@@ -13,6 +13,22 @@ display: block;
 margin: 0 auto;
 margin-bottom: 10px;
 }
+.remodal-form input[type="radio"] ,.remodal-form input[type="checkbox"]  {
+display: inline-block;
+padding: 6px;
+margin: 0 auto;
+margin-bottom: 5px;
+margin-top: 5px;
+}
+.remodal-form  div{
+	    display: inline-block;
+    background-color: #3c8dbc;
+    color: white;
+    width: 90px;
+    margin-bottom: 10px;
+    height: 30px;
+    text-align: center;
+	}
 .remodal-form select{
 	padding: 6px;
 display: block;
