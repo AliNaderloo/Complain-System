@@ -120,6 +120,7 @@ $obj->Deploy();
                      <th>{{$i}}</th>
                      <th>{{$Admin->fld_Name}}</th>
                      <th>{{$Admin->fld_Username}}</th>
+                     <th style="text-align: center;"><img src="img/ProfilePics/{{$Admin->fld_Picture}}" style="height: 50px;width: 50px;border-radius: 100px"></th>
                     <th>
                       @if (!is_null($Admin->fld_Last_Login))
                       {{jDate::forge($Admin->fld_Last_Login)->format('%B %d ، %Y')}}

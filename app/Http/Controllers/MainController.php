@@ -150,7 +150,7 @@ class MainController extends Controller
 		public function showAdmins(){
 			$user=Auth::user();
 			$Users=User::where('fld_Suspend', '=',false)->get();
-			$table = new DataTable2(array('نام و نام خانوادگی', 'نام کاربری', 'آخرین لاگین','زمان ساخت'),$Users);
+			$table = new DataTable2(array('نام و نام خانوادگی', 'نام کاربری','تصویر پروفایل','آخرین لاگین','زمان ساخت'),$Users);
 			return view('showAllAdmins')->with('Table', $table->Data())->with('user',$user);
 		}
 		public function addAdmin(Request $req){

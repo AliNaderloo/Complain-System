@@ -120,6 +120,7 @@ $obj->Deploy();
                      <th><?php echo e($i); ?></th>
                      <th><?php echo e($Admin->fld_Name); ?></th>
                      <th><?php echo e($Admin->fld_Username); ?></th>
+                     <th style="text-align: center;"><img src="img/ProfilePics/<?php echo e($Admin->fld_Picture); ?>" style="height: 50px;width: 50px;border-radius: 100px"></th>
                     <th>
                       <?php if(!is_null($Admin->fld_Last_Login)): ?>
                       <?php echo e(jDate::forge($Admin->fld_Last_Login)->format('%B %d ، %Y')); ?>
