@@ -224,12 +224,18 @@
                 }
               },
             });
-              $('#newComplaintForm').on('submit', function(e){                
+              $('#newComplaintForm').on('submit', function(e){ 
+               $('#Consignment').val($('#Consignment').val().toEnDigit());               
                 e.preventDefault();
                 if ($('#Consignment').val().length < 17) {
                   toastr.error('! شماره بارنامه کمتر از ۱۷ رقم است ');
                   return 0;
                 }
+                if (!$.trim($("#Description").val())) {
+                  toastr.error('! توضیحات را وارد کنید');
+                  return 0;
+                }
+               
                 if ($("input[name='Registrar']:checked").val()==undefined) {
                   toastr.error('! نماینده یا مشتری را مشخص نمایید ');
                   return 0;
@@ -238,7 +244,7 @@
                   toastr.error('فرمت بارنامه درست نیست',$('#Consignment').val());
                   return 0;
                 }
-                $('#Consignment').val($('#Consignment').val().toEnDigit());
+               
                 $.ajax({
                   type: 'GET',
                   url: '/newComplaint',

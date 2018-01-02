@@ -54,7 +54,7 @@ class MainController extends Controller
 			$Complaints_Subjects=Complaints_Subjects::where('fld_Suspend', '=',false)->get();
 			$Complaints = DB::table('tbl_complaints')->whereRaw('tbl_complaints.created_at in (select max(created_at) from tbl_complaints where tbl_complaints.fld_Suspend = false group by (fld_Consignment))')->join('tbl_users', 'tbl_complaints.fld_User', '=', 'tbl_users.fld_Id')->join('tbl_complaints_subjects', 'tbl_complaints.fld_Subject', '=', 'tbl_complaints_subjects.fld_Id')->orderBy('tbl_complaints.created_at','desc')->select('tbl_complaints.*', 'tbl_complaints_subjects.fld_Complaints_Subjects', 'tbl_users.fld_Name')->get();
 				foreach ($Complaints as $Complaint) {
-		$Complaintcount=Complaints::where(['fld_Consignment','=',$Complaint->fld_Consignment],['fld_Suspend','=',false])->count();
+			$Complaintcount=Complaints::where([['fld_Consignment','=',$Complaint->fld_Consignment],['fld_Suspend','=',false]])->count();
 		$Complaint->count=$Complaintcount;
 		}
 			$table = new DataTable2(array('شماره بارنامه', 'موضوع', 'توضیحات','از طرف',' توسط','تاریخ ثبت','مرحله'),$Complaints);
