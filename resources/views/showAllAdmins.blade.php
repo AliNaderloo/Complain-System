@@ -219,7 +219,7 @@ $obj->Deploy();
            },
            success: function(data){
              toastr.success('اکانت با موفقیت اضافه شد ', {timeOut: 7000});
-             $('tbody').append("<tr role="+"row"+" ><th>*</th><th>"+$name+"</th><th>"+$username+"</th><th>ثبت نشده است</th><th>امروز</th></tr>");
+             $('tbody').append("<tr role="+"row"+" ><th>*</th><th>"+$name+"</th><th>"+$username+"</th><th "+"style="+'"'+"text-align:center"+'"'+"><img src="+'"'+"img/ProfilePics/Admin.png"+'"' +"style="+'"'+"height: 50px;width:50px;border-radius: 100px"+'"'+"></th><th>ثبت نشده است</th><th>امروز</th></tr>");
            },
            error: function(data){
                 // Something went wrong
