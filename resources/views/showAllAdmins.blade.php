@@ -97,16 +97,7 @@ $obj->Deploy();
          <th>اقدامات</th>
        </tr>
      </thead>
-     <tfoot>
-      <tr role="row" >
-       <th>شماره</th>
-       @foreach ($Table->head as $head)
-       <th>{{$head}}</th>
-       @endforeach
-       <th>اقدامات</th>
-     </tr>
-   </tfoot>
-   <tbody >
+   <tbody>
                   <!--     <tr role="row" >
                      <form method="post" action="addAdmin">
                        csrf
@@ -129,7 +120,7 @@ $obj->Deploy();
                      <th>{{$i}}</th>
                      <th>{{$Admin->fld_Name}}</th>
                      <th>{{$Admin->fld_Username}}</th>
-                     <th>
+                    <th>
                       @if (!is_null($Admin->fld_Last_Login))
                       {{jDate::forge($Admin->fld_Last_Login)->format('%B %d ، %Y')}}
                       @else
@@ -214,7 +205,6 @@ $obj->Deploy();
 
         $('#addAdmin').click(function(){
          $btn=$(this);
-
          $name= $btn.prev().find("input[name='name']").val();
          $username= $btn.prev().find("input[name='username']").val();
          $password= $btn.prev().find("input[name='password']").val();
@@ -236,13 +226,9 @@ $obj->Deploy();
 
                 // Log in the console
                 var errors = data.responseJSON;
-
                 $.each( errors, function( key, value ) {
                   toastr.error(value);
-
-               });
-
-
+                });
               }
             });
        });
@@ -258,6 +244,7 @@ $obj->Deploy();
            success: function(data){
              $btn.parent().parent().hide('slow', function(){  $btn.parent().parent().remove(); });
              toastr.success('اکانت با موفقیت حذف شد ', {timeOut: 7000});
+             window.location.href = "/";
            }
          });
        });
@@ -279,16 +266,16 @@ $obj->Deploy();
              $chgBtn.parent().parent().find('th:nth-child(3)').text($username);
 
            },
-             error: function(data){
+           error: function(data){
                 // Something went wrong
                 // HERE you can handle asynchronously the response 
                 // Log in the console
                 var errors = data.responseJSON;
                 $.each( errors, function( key, value ) {
                   toastr.error(value);
-               });
+                });
               }
-         });
+            });
        });
         $("a[data-remodal-target='modal2']").click(function(){
          $id=$(this).attr('value') ;
@@ -299,8 +286,6 @@ $obj->Deploy();
          $("div[data-remodal-id='modal2']").find("input[name='name']").val($name);
          $("div[data-remodal-id='modal2']").find("input[name='username']").val($username);
        });
-
-
       });
 
     </script>

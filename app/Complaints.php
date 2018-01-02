@@ -13,6 +13,9 @@ class Complaints extends Model
 	{
 		return $this->hasOne('App\Complaints_Subjects','fld_Id','fld_Subject'); 
 	}	
-	
+	public function getUser()
+	{
+		return $this->hasOne('App\User','fld_Id','fld_User'); 
+	}
 
 }

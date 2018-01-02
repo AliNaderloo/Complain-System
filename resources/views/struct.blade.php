@@ -3,8 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
- @yield('title')
- 
+  @yield('title')
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
@@ -32,7 +31,7 @@
    <!-- DataTables -->
    <link rel="stylesheet" href="../../plugins/datatables/dataTables.bootstrap.css">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remodal/1.1.1/remodal.css" integrity="sha256-e8D8laFfmKxErx7NbvjaJYUEpv9LN8qgeXQj0DvLd+g=" crossorigin="anonymous" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remodal/1.1.1/remodal-default-theme.min.css" integrity="sha256-iJlvlQFv31232zI/zrsL/jbuubLWWr/Bv99d+XfaC7Y=" crossorigin="anonymous" />
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remodal/1.1.1/remodal-default-theme.min.css" integrity="sha256-iJlvlQFv31232zI/zrsL/jbuubLWWr/Bv99d+XfaC7Y=" crossorigin="anonymous" />
 
    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -70,8 +69,8 @@
         <div class="navbar-custom-menu">
           <ul class="nav navbar-nav">
             <!-- Messages: style can be found in dropdown.less-->
-            <li class="dropdown messages-menu">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <li style="display: none;" class="dropdown messages-menu">
+              <a href="#"  class="" data-toggle="dropdown">
                 <i class="fa fa-envelope-o"></i>
                 <span class="label label-success">4</span>
               </a>
@@ -83,7 +82,7 @@
                     <li><!-- start message -->
                       <a href="#">
                         <div class="pull-left">
-                          <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                          <img class="profPic" src="{{ asset('img/ProfilePics/'.$user->fld_Picture) }}" class="img-circle profPic" alt="User Image">
                         </div>
                         <h4>
                           Support Team
@@ -147,7 +146,7 @@
               </ul>
             </li>
             <!-- Notifications: style can be found in dropdown.less -->
-            <li class="dropdown notifications-menu">
+            <li style="display: none;" class="dropdown notifications-menu">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <i class="fa fa-bell-o"></i>
                 <span class="label label-warning">10</span>
@@ -189,9 +188,9 @@
               </ul>
             </li>
             <!-- Tasks: style can be found in dropdown.less -->
-            <li class="dropdown tasks-menu">
+            <li style="display: none;"  class="dropdown tasks-menu">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <i class="fa fa-flag-o"></i>
+                <i  class="fa fa-flag-o"></i>
                 <span class="label label-danger">9</span>
               </a>
               <ul class="dropdown-menu">
@@ -264,27 +263,26 @@
             </li>
             <!-- User Account: style can be found in dropdown.less -->
             <li class="dropdown user user-menu">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+              <a href="#" id="adminDrop" >
+                <img src="{{ asset('img/ProfilePics/'.$user->fld_Picture) }}" class=" profPic user-image" alt="User Image">
                 <span class="hidden-xs">{{$user->fld_Name}}</span>
               </a>
-              <ul class="dropdown-menu">
+              <ul id="adminUl" class="dropdown-menu">
                 <!-- User image -->
                 <li class="user-header">
-                  <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-
+                  <img src="{{ asset('img/ProfilePics/'.$user->fld_Picture) }}" class=" profPic img-circle profPic" alt="User Image">
                   <p>
                     {{$user->fld_Name}}
                     <small>آخرین لاگین :
                       @if (!is_null(session('lastLogin')))
-                     {{jDate::forge( session('lastLogin'))->ago() }}
-                     @else 
-                     اولین لاگین شماست !
-                     @endif
-                   </small>
-                   </p>
-                 </li>
-                 <!-- Menu Body -->
+                      {{jDate::forge( session('lastLogin'))->ago() }}
+                      @else 
+                      اولین لاگین شماست !
+                      @endif
+                    </small>
+                  </p>
+                </li>
+                <!-- Menu Body -->
              <!-- <li class="user-body">
                 <div class="row">
                   <div class="col-xs-4 text-center">
@@ -301,62 +299,73 @@
               </li>
               <!-- Menu Footer-->
               <li class="user-footer">
-                <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">پروفایل</a>
+                <div class="pull-left" >
+                  <button style="width: 200px"  data-toggle="dropdown" data-bind="enable: !noResults()"  href="#" id="picLoader" class="btn btn-default btn-flat"> تصویر پروفایل <i class="glyphicon glyphicon-chevron-down"></i> </button>
                 </div>
                 <div class="pull-right">
-                  <a href="/Logout" class="btn btn-default btn-flat">خروج</a>
+                  <a href="/Logout"  class="btn btn-default btn-flat">خروج</a>
                 </div>
               </li>
-            </ul>
-          </li>
-          <!-- Control Sidebar Toggle Button -->
-          <li>
-            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-          </li>
-        </ul>
-      </div>
-
-    </nav>
-  </header>
-  <!-- Left side column. contains the logo and sidebar -->
-  <aside class="main-sidebar direction">
-    <!-- sidebar: style can be found in sidebar.less -->
-    <section class="sidebar">
-      <!-- Sidebar user panel -->
-      <div class="user-panel">
-        <div class="pull-right image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-        </div>
-        <div class="pull-right info">
-          <p>{{$user->fld_Name}}</p>
-          <a href="#"><i class="fa fa-circle text-success"></i> آنلاین</a>
-        </div>
-      </div>
-      <!-- search form -->
-
-      <!-- /.search form -->
-      <!-- sidebar menu: : style can be found in sidebar.less -->
-      <ul class="sidebar-menu">
-        <li class="header">منو اصلی</li>
-         @yield('sidebar')
-      
+              <li class="user-footer user-picture">
+               <div class="pull-left">
+                <button id="uploadBtn" style=" width: 170px;" class="btn btn-default btn-flat">اپلود</button>
+              </div>
+              <div class="pull-right">
+                <form action="{{URL::to('/ProfilePicture')}}" id="upload-form" method="post" enctype="multipart/form-data" >
+                  {{ csrf_field() }}
+                  <label class="photolbl btn btn-default btn-flat" style="width: 85px;" for="upload-photo">انتخاب</label>
+                  <input type="file" name="photo" id="upload-photo" />
+                  <input style="display: none;" type="submit" name="submit">
+                </form>
+              </div>
+            </li>
+          </ul>
+        </li>
+        <!-- Control Sidebar Toggle Button -->
+        <li style="display: none;">
+          <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+        </li>
       </ul>
-    </section>
-    <!-- /.sidebar -->
-  </aside>
+    </div>
 
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
+  </nav>
+</header>
+<!-- Left side column. contains the logo and sidebar -->
+<aside class="main-sidebar direction">
+  <!-- sidebar: style can be found in sidebar.less -->
+  <section class="sidebar">
+    <!-- Sidebar user panel -->
+    <div class="user-panel">
+      <div class="pull-right image">
+        <img src="{{ asset('img/ProfilePics/'.$user->fld_Picture) }}" class="img-circle profPic" alt="User Image">
+      </div>
+      <div class="pull-right info">
+        <p>{{$user->fld_Name}}</p>
+        <a href="#"><i class="fa fa-circle text-success"></i> آنلاین</a>
+      </div>
+    </div>
+    <!-- search form -->
+    <!-- /.search form -->
+    <!-- sidebar menu: : style can be found in sidebar.less -->
+    <ul class="sidebar-menu">
+      <li class="header">منو اصلی</li>
+      @yield('sidebar')
+    </ul>
+  </section>
+  <!-- /.sidebar -->
+</aside>
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
 
 
-    <!-- Main content -->
-    <section class="content">
-      @yield('content')
-     
-      </section>
-<!-- /.content -->
+  <!-- Main content -->
+  <section class="content">
+    @yield('content')
+
+  </section>
+  <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
 <footer class="main-footer">
@@ -597,7 +606,51 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/remodal/1.1.1/remodal.min.js" integrity="sha256-tR7fz2fCeycqI9/V8mL9nyTc4lI14kg2Qm6zZHuupxE=" crossorigin="anonymous"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js" integrity="sha256-3blsJd4Hli/7wCQ+bmgXfOdK7p/ZUMtPXY08jmxSSgk=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js" integrity="sha256-2Pjr1OlpZMY6qesJM68t2v39t+lMLvxwpa8QlRjJroA=" crossorigin="anonymous"></script>
 @yield('extensions')
+<script type="text/javascript">
 
+  $(function () {
+    function readURL(input) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+          $('.profPic').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+    $('#adminDrop').click(function() {
+      if ($('#adminUl').css('display') == 'block') {
+        $('#adminUl').css('display', 'none');
+      } else {
+        $('#adminUl').css('display', 'block');
+      }
+    });
+    $("#picLoader").click(function(){
+      $( ".user-picture" ).slideToggle( "slow", function() {
+    // Animation complete.
+  });
+    });
+    $("#Uploadimgbtn").click(function(){
+     $('#file').trigger('click');
+   });
+    $("#file").change(function() {
+      readURL(this);
+      $('#picAddr').val($('#file').val());
+    });
+    $('input[name=photo]').change(function() {
+      readURL(this);
+    });
+
+    $("#uploadBtn").click(function(){
+      $('#upload-form').ajaxSubmit({
+        success: function(res) {
+          toastr.success('تصویر شما با موفقیت تغیر پیدا کرد', {timeOut: 7000});
+        }
+      });
+    });
+  });
+</script>
 </body>
 </html>

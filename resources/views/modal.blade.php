@@ -21,6 +21,6 @@
       @endif
       @endforeach
    </div>
-   <button data-remodal-action="confirm" class="remodal-confirm" id="{{$Modal->btnId}}">اضافه کردن</button>
+   <button data-remodal-action="confirm" class="remodal-confirm" id="{{$Modal->btnId}}">تأیید</button>
    <button data-remodal-action="cancel" class="remodal-cancel">انصراف</button>
 </div>

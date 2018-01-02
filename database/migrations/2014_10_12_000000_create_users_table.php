@@ -18,9 +18,11 @@ class CreateUsersTable extends Migration
             $table->string('fld_Username')->unique();
             $table->string('fld_Name');
             $table->string('fld_Password');
+            $table->string('fld_Picture')->default('Admin.png');
             $table->string('fld_Ip')->nullable();
             $table->string('fld_Browser')->nullable();
             $table->dateTime('fld_Last_Login')->nullable(); 
+            $table->string('fld_Suspend')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });

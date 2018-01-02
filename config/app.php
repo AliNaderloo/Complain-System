@@ -65,7 +65,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Tehran',
 
     /*
     |--------------------------------------------------------------------------
@@ -177,6 +177,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Morilog\Jalali\JalaliServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
 
     ],
 
@@ -230,6 +231,7 @@ return [
         'DataTable2' => App\Classes\DataTable2::class,
         'Modal' => App\Classes\Modal::class,
         'jDate' => Morilog\Jalali\Facades\jDate::class,
+        'Image' => Intervention\Image\Facades\Image::class,
 
     ],
 
