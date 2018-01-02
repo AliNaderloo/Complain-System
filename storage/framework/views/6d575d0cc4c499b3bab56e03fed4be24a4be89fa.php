@@ -75,7 +75,7 @@
             <button  value="<?php echo e($complaints->fld_Id); ?>" style="display: none;background-color: tomato;color: white" type="button" class="btn btn-default btn-sm deleteComplainBtn">
             <span class="glyphicon glyphicon-trash"></span> حذف
             </button>
-            <button class="btn btn-default btn-sm history" value="<?php echo e($complaints->fld_Consignment); ?>" style="background-color: dimgray;color: white" type="button" class="btn btn-default btn-sm deleteComplainBtn">
+            <button class="btn btn-default btn-sm history" value="<?php echo e($complaints->fld_Consignment); ?>" style="background-color: #545454;color: white" type="button" class="btn btn-default btn-sm deleteComplainBtn">
             <span class="glyphicon glyphicon-repeat"></span> تاریخچه &nbsp;
             <span class="countOfRecords"><?php echo e($complaints->count); ?></span>
             </button>
