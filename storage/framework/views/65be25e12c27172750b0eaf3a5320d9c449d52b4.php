@@ -15,7 +15,7 @@
             <th style="text-align: center;"><?php echo ++$i ?></th>
             <th class="consignment"><?php echo e($complaints->fld_Consignment); ?></th>
             <th><?php echo e($complaints->fld_Complaints_Subjects); ?></th>
-            <th><p style="width: 230px"><?php echo e($complaints->fld_Description); ?></p></th>
+            <th><p style="width: 210px;word-break: break-all;"><?php echo e($complaints->fld_Description); ?></p></th>
             <th style="min-width: 60px">
             <?php if($complaints->fld_Registrar==1): ?>
             نماینده
@@ -48,7 +48,7 @@
             <button  value="<?php echo e($complaints->fld_Id); ?>" style="display: none;background-color: tomato;color: white" type="button" class="btn btn-default btn-sm deleteComplainBtn">
             <span class="glyphicon glyphicon-trash"></span> حذف
             </button>
-            <button class="btn btn-default btn-sm history" value="<?php echo e($complaints->fld_Consignment); ?>" style="background-color: dimgray;color: white" type="button" class="btn btn-default btn-sm deleteComplainBtn">
+            <button class="btn btn-default btn-sm history" value="<?php echo e($complaints->fld_Consignment); ?>" style="background-color: 545454;color: white" type="button" class="btn btn-default btn-sm deleteComplainBtn">
             <span class="glyphicon glyphicon-repeat"></span> تاریخچه
             &nbsp;
             <span class="countOfRecords"><?php echo e($complaints->count); ?></span>
