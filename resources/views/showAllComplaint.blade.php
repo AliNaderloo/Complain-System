@@ -148,6 +148,7 @@
             @section ('extensions')
             <script>
             $(function () {
+               var $globBtn;
               String.prototype.toEnDigit = function() {
                 return this.replace(/[\u06F0-\u06F9]+/g, function(digit) {
                   var ret = '';
@@ -191,7 +192,7 @@
               if (!e.ctrlKey) {
                 toastr.warning('تنها عدد مجاز است');
               }
-              
+
               e.preventDefault();
             }
             if ($('#Consignment').val().length >= 17) {
@@ -240,7 +241,7 @@
                 toastr.error('! توضیحات را وارد کنید');
                 return 0;
               }
-              
+
               if ($("input[name='Registrar']:checked").val()==undefined) {
                 toastr.error('! نماینده یا مشتری را مشخص نمایید ');
                 return 0;
@@ -249,7 +250,7 @@
                 toastr.error('فرمت بارنامه درست نیست',$('#Consignment').val());
                 return 0;
               }
-              
+
               $.ajax({
                 type: 'GET',
                 url: '/newComplaint',
@@ -303,6 +304,7 @@
                $id= $(this).attr('value');
                $target= $( "#DataTable th:contains("+$globHistory+")").parent();
                $btn=$(this);
+               $globBtn.text($globBtn.text()-1);
                $.ajax({
                  method: "get",
                  url: "{{URL::to('/RemoveComplaint')}}",
@@ -318,7 +320,7 @@
                        var inst = $('[data-remodal-id=modal]').remodal();
                        inst.close();
                      }
-                     
+
                    });
                    toastr.success('شکایت با موفقیت حذف شد ', {timeOut: 7000});
                    $globHistory="";
@@ -333,6 +335,7 @@
               $(document).on('click', '.history', function(e) {
                $id= $(this).attr('value') ;
                $globHistory=$id;
+               $globBtn=$(this).find('.countOfRecords');
                $.ajax({
                  method: "GET",
                  url: "{{URL::to('/ComplaintHistory')}}",
@@ -370,7 +373,6 @@
                       }
                     },
                   });
-
                   inst.open();
                 }
               });
