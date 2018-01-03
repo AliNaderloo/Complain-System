@@ -1,4 +1,4 @@
-<table id="DataTable" style="font-size: 14px" class="table direction table-bordered table-hover dataTable" role="grid" >
+<table id="DataTable" style="font-size: 14px" class="table direction table-hover dataTable" role="grid" >
         <thead>
           <tr  role="row" >
             <th>شماره</th>

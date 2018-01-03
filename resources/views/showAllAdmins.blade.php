@@ -87,7 +87,7 @@ $obj->Deploy();
    <div class="col-md-12">
     <div class="box box-primary">
      <div class="box-body">
-      <table id="DataTable" class="table direction table-bordered table-hover dataTable" role="grid" >
+      <table id="DataTable" class="table direction  table-hover dataTable" role="grid" >
        <thead>
         <tr  role="row" >
          <th>شماره</th>

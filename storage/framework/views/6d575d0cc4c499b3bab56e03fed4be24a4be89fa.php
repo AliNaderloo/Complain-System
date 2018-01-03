@@ -25,7 +25,7 @@
   <div class="col-md-12">
     <div class="box box-primary">
       <div class="box-body">
-       <table id="DataTable" style="font-size: 14px" class="table direction table-bordered table-hover dataTable" role="grid" >
+       <table id="DataTable" style="font-size: 14px" class="table direction table-hover dataTable" role="grid" >
         <thead>
           <tr  role="row" >
             <th>شماره</th>
@@ -62,15 +62,6 @@
             <option <?php if($complaints->fld_Level==3): ?> selected="true" <?php endif; ?> value="3"> به اتمام رسیده</option>
             </select>
             </th>
-            <!--      <th>
-            <a  href="/Complain/$complaints->fld_Id" target="_blank">
-            <div >
-            <button style="background-color: #3c8dbc;color: white;font-size: 14px" type="button" class="btn btn-default btn-sm">
-            <span class="glyphicon glyphicon-edit"></span> تغیر
-            </button>
-            </div>
-            </a>
-            </th> -->
             <th>
             <button  value="<?php echo e($complaints->fld_Id); ?>" style="display: none;background-color: tomato;color: white" type="button" class="btn btn-default btn-sm deleteComplainBtn">
             <span class="glyphicon glyphicon-trash"></span> حذف
@@ -84,7 +75,13 @@
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </tbody>
             </table>
-            <button class="btn btn-default btn-sm newComplaint" style=" line-height: 18px;background-color: #239D60;font-size:13px;color: white" type="button">
+            <form method="get" id="trackForm" action="#" style="display:inline-block;float:left">
+            <button type="submit" class="btn btn-default btn-sm newTrack" style="background-color: #239D60;font-size: 13px;height: 32px;margin-top: 7px;color: white;" type="button">
+            <span style="vertical-align: -2px;" class="glyphicon glyphicon-search"></span> پیگیری
+            </button>
+            <input placeholder="شماره بارنامه" name="Consignment" style="line-height: 25px;  direction: ltr;">
+            </form>
+            <button class="btn btn-default btn-sm newComplaint" style="     background-color: #239D60;font-size: 13px;height: 32px;margin-top: 5px;color: white;" type="button">
             <span style="vertical-align: -2px;" class="glyphicon glyphicon-plus"></span> شکایت جدید
             </button>
             </div>
@@ -148,114 +145,238 @@
             <?php $__env->startSection('extensions'); ?>
             <script>
             $(function () {
-               var $globBtn;
-              String.prototype.toEnDigit = function() {
-                return this.replace(/[\u06F0-\u06F9]+/g, function(digit) {
-                  var ret = '';
-                  for (var i = 0, len = digit.length; i < len; i++) {
-                    ret += String.fromCharCode(digit.charCodeAt(i) - 1728);
-                  }
-                  return ret;
-                });
-              };
-              toastr.options = {
-                "closeButton": false,
-                "debug": false,
-                "newestOnTop": false,
-                "progressBar": true,
-                "positionClass": "toast-top-left",
-                "preventDuplicates": false,
-                "onclick": null,
-                "showDuration": "300",
-                "hideDuration": "1000",
-                "timeOut": "5000",
-                "extendedTimeOut": "1000",
-                "showEasing": "swing",
-                "hideEasing": "linear",
-                "showMethod": "fadeIn",
-                "hideMethod": "fadeOut"
-              }
-              $('#Consignment').keydown(function (e) {
-        // Allow: backspace, delete, tab, escape, enter and .
-                if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
-             // Allow: Ctrl+A, Command+A
-                 (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
-             // Allow: Ctrl+V, Command+V
-                 (e.keyCode === 86 && (e.ctrlKey === true || e.metaKey === true)) || 
-             // Allow: home, end, left, right, down, up
-                 (e.keyCode >= 35 && e.keyCode <= 40)) {
-                 // let it happen, don't do anything
-                 return;
-             }
-        // Ensure that it is a number and stop the keypress
-             if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
-              if (!e.ctrlKey) {
-                toastr.warning('تنها عدد مجاز است');
-              }
-
-              e.preventDefault();
-            }
-            if ($('#Consignment').val().length >= 17) {
-
-              toastr.error('بیشتر از ۱۷ رقم وارد کردید');
-
-
-              
-              e.preventDefault();
-            }
-          });
-              var MainDataTable=  $('#DataTable').DataTable({
-               aaSorting: [[6, 'desc']],
-               "language": {
-                "sEmptyTable":     "هیچ داده ای در جدول وجود ندارد",
-                "sInfo":           "نمایش _START_ تا _END_ از _TOTAL_ رکورد",
-                "sInfoEmpty":      "نمایش 0 تا 0 از 0 رکورد",
-                "sInfoFiltered":   "(فیلتر شده از _MAX_ رکورد)",
-                "sInfoPostFix":    "",
-                "sInfoThousands":  ",",
-                "sLengthMenu":     "نمایش _MENU_ رکورد",
-                "sLoadingRecords": "در حال بارگزاری...",
-                "sProcessing":     "در حال پردازش...",
-                "sSearch":         "جستجو:",
-                "sZeroRecords":    "رکوردی با این مشخصات پیدا نشد",
-                "oPaginate": {
-                  "sFirst":    "ابتدا",
-                  "sLast":     "انتها",
-                  "sNext":     "بعدی",
-                  "sPrevious": "قبلی"
-                },
-                "oAria": {
-                  "sSortAscending":  ": فعال سازی نمایش به صورت صعودی",
-                  "sSortDescending": ": فعال سازی نمایش به صورت نزولی"
+             var $globBtn;
+             String.prototype.toEnDigit = function() {
+              return this.replace(/[\u06F0-\u06F9]+/g, function(digit) {
+                var ret = '';
+                for (var i = 0, len = digit.length; i < len; i++) {
+                  ret += String.fromCharCode(digit.charCodeAt(i) - 1728);
                 }
+                return ret;
+              });
+            };
+            toastr.options = {
+              "closeButton": false,
+              "debug": false,
+              "newestOnTop": false,
+              "progressBar": true,
+              "positionClass": "toast-top-left",
+              "preventDuplicates": false,
+              "onclick": null,
+              "showDuration": "300",
+              "hideDuration": "1000",
+              "timeOut": "5000",
+              "extendedTimeOut": "1000",
+              "showEasing": "swing",
+              "hideEasing": "linear",
+              "showMethod": "fadeIn",
+              "hideMethod": "fadeOut"
+            }
+            $('#Consignment').keydown(function (e) {
+        // Allow: backspace, delete, tab, escape, enter and .
+              if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+             // Allow: Ctrl+A, Command+A
+               (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+             // Allow: Ctrl+V, Command+V
+               (e.keyCode === 86 && (e.ctrlKey === true || e.metaKey === true)) || 
+             // Allow: home, end, left, right, down, up
+               (e.keyCode >= 35 && e.keyCode <= 40)) {
+                 // let it happen, don't do anything
+               return;
+           }
+        // Ensure that it is a number and stop the keypress
+           if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+            if (!e.ctrlKey) {
+              toastr.warning('تنها عدد مجاز است');
+            }
+            e.preventDefault();
+          }
+          if ($('#Consignment').val().length >= 17) {
+            toastr.error('بیشتر از ۱۷ رقم وارد کردید');
+            e.preventDefault();
+          }
+        });
+            var MainDataTable=  $('#DataTable').DataTable({
+             aaSorting: [[6, 'desc']],
+             "language": {
+              "sEmptyTable":     "هیچ داده ای در جدول وجود ندارد",
+              "sInfo":           "نمایش _START_ تا _END_ از _TOTAL_ رکورد",
+              "sInfoEmpty":      "نمایش 0 تا 0 از 0 رکورد",
+              "sInfoFiltered":   "(فیلتر شده از _MAX_ رکورد)",
+              "sInfoPostFix":    "",
+              "sInfoThousands":  ",",
+              "sLengthMenu":     "نمایش _MENU_ رکورد",
+              "sLoadingRecords": "در حال بارگزاری...",
+              "sProcessing":     "در حال پردازش...",
+              "sSearch":         "جستجو:",
+              "sZeroRecords":    "رکوردی با این مشخصات پیدا نشد",
+              "oPaginate": {
+                "sFirst":    "ابتدا",
+                "sLast":     "انتها",
+                "sNext":     "بعدی",
+                "sPrevious": "قبلی"
               },
+              "oAria": {
+                "sSortAscending":  ": فعال سازی نمایش به صورت صعودی",
+                "sSortDescending": ": فعال سازی نمایش به صورت نزولی"
+              }
+            },
+          });
+            $('#newComplaintForm').on('submit', function(e){ 
+             $('#Consignment').val($('#Consignment').val().toEnDigit());               
+             e.preventDefault();
+             if ($('#Consignment').val().length < 17) {
+              toastr.error('! شماره بارنامه کمتر از ۱۷ رقم است ');
+              return 0;
+            }
+            if (!$.trim($("#Description").val())) {
+              toastr.error('! توضیحات را وارد کنید');
+              return 0;
+            }
+
+            if ($("input[name='Registrar']:checked").val()==undefined) {
+              toastr.error('! نماینده یا مشتری را مشخص نمایید ');
+              return 0;
+            }
+            if ($('#Consignment').val().substr(0,7)!=5410000 || $('#Consignment').val().substr(14,3)!=101 ){
+              toastr.error('فرمت بارنامه درست نیست',$('#Consignment').val());
+              return 0;
+            }
+            $.ajax({
+              type: 'GET',
+              url: '/newComplaint',
+              data: $('#newComplaintForm').serialize(),
+              success: function(data) {
+                $('#DataTable_wrapper').remove();
+                $('.box-body').prepend(data);
+                MainDataTable=  $('#DataTable').DataTable({
+                 aaSorting: [[6, 'desc']],
+                 "language": {
+                  "sEmptyTable":     "هیچ داده ای در جدول وجود ندارد",
+                  "sInfo":           "نمایش _START_ تا _END_ از _TOTAL_ رکورد",
+                  "sInfoEmpty":      "نمایش 0 تا 0 از 0 رکورد",
+                  "sInfoFiltered":   "(فیلتر شده از _MAX_ رکورد)",
+                  "sInfoPostFix":    "",
+                  "sInfoThousands":  ",",
+                  "sLengthMenu":     "نمایش _MENU_ رکورد",
+                  "sLoadingRecords": "در حال بارگزاری...",
+                  "sProcessing":     "در حال پردازش...",
+                  "sSearch":         "جستجو:",
+                  "sZeroRecords":    "رکوردی با این مشخصات پیدا نشد",
+                  "oPaginate": {
+                    "sFirst":    "ابتدا",
+                    "sLast":     "انتها",
+                    "sNext":     "بعدی",
+                    "sPrevious": "قبلی"
+                  },
+                  "oAria": {
+                    "sSortAscending":  ": فعال سازی نمایش به صورت صعودی",
+                    "sSortDescending": ": فعال سازی نمایش به صورت نزولی"
+                  }
+                },
+              });
+                var inst = $('[data-remodal-id=createModal]').remodal();
+                inst.close();
+                $('[data-remodal-id=createModal] input[type="text"]').val('');
+                $('[data-remodal-id=createModal] textarea').val('');
+                $('[data-remodal-id=createModal] input[type="radio"]').prop('checked', false);
+                toastr.success('شکایت با موفقیت ثبت شد', {timeOut: 7000});
+              }
             });
-              $('#newComplaintForm').on('submit', function(e){ 
-               $('#Consignment').val($('#Consignment').val().toEnDigit());               
-               e.preventDefault();
-               if ($('#Consignment').val().length < 17) {
-                toastr.error('! شماره بارنامه کمتر از ۱۷ رقم است ');
-                return 0;
-              }
-              if (!$.trim($("#Description").val())) {
-                toastr.error('! توضیحات را وارد کنید');
-                return 0;
-              }
+          });
+            $(document).on('click', '.deleteComplainBtn', function(e) {
+             $id= $(this).attr('value');
+             $target= $( "#DataTable th:contains("+$globHistory+")").parent();
+             $btn=$(this);
+             $globBtn.text($globBtn.text()-1);
+             $.ajax({
+               method: "get",
+               url: "<?php echo e(URL::to('/RemoveComplaint')); ?>",
+               data: {
+                 id: $id
+               },
+               success: function(data){
+                 $btn.parent().parent().hide('slow', function(){ 
+                   var selRow= $btn.parent().parent().remove();
+                   historyTable.row(selRow).remove().draw();
+                   if (!(historyTable.rows().any())) {
+                     MainDataTable.row( $target ).remove().draw();
+                     var inst = $('[data-remodal-id=modal]').remodal();
+                     inst.close();
+                   }
+                 });
+                 toastr.success('شکایت با موفقیت حذف شد ', {timeOut: 7000});
+                 $globHistory="";
+               }
+             });
+           });
 
-              if ($("input[name='Registrar']:checked").val()==undefined) {
-                toastr.error('! نماینده یا مشتری را مشخص نمایید ');
-                return 0;
+            $(".newComplaint" ).click(function() {
+              var inst = $('[data-remodal-id=createModal]').remodal();
+              inst.open();
+            });
+            $(document).on('click', '.history', function(e) {
+             $id= $(this).attr('value') ;
+             $globHistory=$id;
+             $globBtn=$(this).find('.countOfRecords');
+             $.ajax({
+               method: "GET",
+               url: "<?php echo e(URL::to('/ComplaintHistory')); ?>",
+               data: {
+                 id: $id
+               },
+               success: function(data){
+                var inst = $('[data-remodal-id=modal]').remodal();
+                $( "#modalTable" ).append(data);
+                $('#selConsignment').text($id);
+                historyTable = $('#history').DataTable({
+                  aaSorting: [[6, 'desc']],
+                  "pageLength": 9,
+                  "language": {
+                    "sEmptyTable":     "هیچ داده ای در جدول وجود ندارد",
+                    "sInfo":           "نمایش _START_ تا _END_ از _TOTAL_ رکورد",
+                    "sInfoEmpty":      "نمایش 0 تا 0 از 0 رکورد",
+                    "sInfoFiltered":   "(فیلتر شده از _MAX_ رکورد)",
+                    "sInfoPostFix":    "",
+                    "sInfoThousands":  ",",
+                    "sLengthMenu":     "نمایش _MENU_ رکورد",
+                    "sLoadingRecords": "در حال بارگزاری...",
+                    "sProcessing":     "در حال پردازش...",
+                    "sSearch":         "جستجو:",
+                    "sZeroRecords":    "رکوردی با این مشخصات پیدا نشد",
+                    "oPaginate": {
+                      "sFirst":    "ابتدا",
+                      "sLast":     "انتها",
+                      "sNext":     "بعدی",
+                      "sPrevious": "قبلی"
+                    },
+                    "oAria": {
+                      "sSortAscending":  ": فعال سازی نمایش به صورت صعودی",
+                      "sSortDescending": ": فعال سازی نمایش به صورت نزولی"
+                    }
+                  },
+                });
+                inst.open();
               }
-              if ($('#Consignment').val().substr(0,7)!=5410000 || $('#Consignment').val().substr(14,3)!=101 ){
-                toastr.error('فرمت بارنامه درست نیست',$('#Consignment').val());
-                return 0;
-              }
-
+            });
+           });
+            $(document).on('closing', '[data-remodal-id=modal]', function (e) {
+             $( "#modalTable" ).html('');
+           });
+            $(document).on('change', '.level', function (e) {
+              $btn=$(this);
+              $id=$(this).attr('name');
+              $level=jQuery(this).val();
+              $con=$(this).parent().parent().find('.consignment:first').text();
               $.ajax({
-                type: 'GET',
-                url: '/newComplaint',
-                data: $('#newComplaintForm').serialize(),
-                success: function(data) {
+                method: "GET",
+                url: "<?php echo e(URL::to('/ChangeLevel')); ?>",
+                data: {
+                  id: $id,
+                  level:$level
+                },
+                success: function(data){
+                  toastr.success('بارنامه '+": "+$con, 'وضعیت شکایت تغیر پیدا کرد', {timeOut: 7000});
                   $('#DataTable_wrapper').remove();
                   $('.box-body').prepend(data);
                   MainDataTable=  $('#DataTable').DataTable({
@@ -284,149 +405,15 @@
                     }
                   },
                 });
-
-                  var inst = $('[data-remodal-id=createModal]').remodal();
-                  inst.close();
-                  $('[data-remodal-id=createModal] input[type="text"]').val('');
-                  $('[data-remodal-id=createModal] textarea').val('');
-                  $('[data-remodal-id=createModal] input[type="radio"]').prop('checked', false);
-
-                  toastr.success('شکایت با موفقیت ثبت شد', {timeOut: 7000});
-
-
-                }
-
-              });
-            });
-
-
-              $(document).on('click', '.deleteComplainBtn', function(e) {
-               $id= $(this).attr('value');
-               $target= $( "#DataTable th:contains("+$globHistory+")").parent();
-               $btn=$(this);
-               $globBtn.text($globBtn.text()-1);
-               $.ajax({
-                 method: "get",
-                 url: "<?php echo e(URL::to('/RemoveComplaint')); ?>",
-                 data: {
-                   id: $id
-                 },
-                 success: function(data){
-                   $btn.parent().parent().hide('slow', function(){ 
-                     var selRow= $btn.parent().parent().remove();
-                     historyTable.row(selRow).remove().draw();
-                     if (!(historyTable.rows().any())) {
-                       MainDataTable.row( $target ).remove().draw();
-                       var inst = $('[data-remodal-id=modal]').remodal();
-                       inst.close();
-                     }
-
-                   });
-                   toastr.success('شکایت با موفقیت حذف شد ', {timeOut: 7000});
-                   $globHistory="";
-                 }
-               });
-             });
-
-              $(".newComplaint" ).click(function() {
-                var inst = $('[data-remodal-id=createModal]').remodal();
-                inst.open();
-              });
-              $(document).on('click', '.history', function(e) {
-               $id= $(this).attr('value') ;
-               $globHistory=$id;
-               $globBtn=$(this).find('.countOfRecords');
-               $.ajax({
-                 method: "GET",
-                 url: "<?php echo e(URL::to('/ComplaintHistory')); ?>",
-                 data: {
-                   id: $id
-                 },
-                 success: function(data){
-                  var inst = $('[data-remodal-id=modal]').remodal();
-                  $( "#modalTable" ).append(data);
-                  $('#selConsignment').text($id);
-                  historyTable = $('#history').DataTable({
-                    aaSorting: [[6, 'desc']],
-                    "pageLength": 9,
-                    "language": {
-                      "sEmptyTable":     "هیچ داده ای در جدول وجود ندارد",
-                      "sInfo":           "نمایش _START_ تا _END_ از _TOTAL_ رکورد",
-                      "sInfoEmpty":      "نمایش 0 تا 0 از 0 رکورد",
-                      "sInfoFiltered":   "(فیلتر شده از _MAX_ رکورد)",
-                      "sInfoPostFix":    "",
-                      "sInfoThousands":  ",",
-                      "sLengthMenu":     "نمایش _MENU_ رکورد",
-                      "sLoadingRecords": "در حال بارگزاری...",
-                      "sProcessing":     "در حال پردازش...",
-                      "sSearch":         "جستجو:",
-                      "sZeroRecords":    "رکوردی با این مشخصات پیدا نشد",
-                      "oPaginate": {
-                        "sFirst":    "ابتدا",
-                        "sLast":     "انتها",
-                        "sNext":     "بعدی",
-                        "sPrevious": "قبلی"
-                      },
-                      "oAria": {
-                        "sSortAscending":  ": فعال سازی نمایش به صورت صعودی",
-                        "sSortDescending": ": فعال سازی نمایش به صورت نزولی"
-                      }
-                    },
-                  });
-                  inst.open();
                 }
               });
-             });
-              $(document).on('closing', '[data-remodal-id=modal]', function (e) {
-               $( "#modalTable" ).html('');
-             });
-              $(document).on('change', '.level', function (e) {
-                $btn=$(this);
-                $id=$(this).attr('name');
-                $level=jQuery(this).val();
-                $con=$(this).parent().parent().find('.consignment:first').text();
-                $.ajax({
-                  method: "GET",
-                  url: "<?php echo e(URL::to('/ChangeLevel')); ?>",
-                  data: {
-                    id: $id,
-                    level:$level
-                  },
-                  success: function(data){
-                    toastr.success('بارنامه '+": "+$con, 'وضعیت شکایت تغیر پیدا کرد', {timeOut: 7000});
-                    $('#DataTable_wrapper').remove();
-                    $('.box-body').prepend(data);
-                    MainDataTable=  $('#DataTable').DataTable({
-                     aaSorting: [[6, 'desc']],
-                     "language": {
-                      "sEmptyTable":     "هیچ داده ای در جدول وجود ندارد",
-                      "sInfo":           "نمایش _START_ تا _END_ از _TOTAL_ رکورد",
-                      "sInfoEmpty":      "نمایش 0 تا 0 از 0 رکورد",
-                      "sInfoFiltered":   "(فیلتر شده از _MAX_ رکورد)",
-                      "sInfoPostFix":    "",
-                      "sInfoThousands":  ",",
-                      "sLengthMenu":     "نمایش _MENU_ رکورد",
-                      "sLoadingRecords": "در حال بارگزاری...",
-                      "sProcessing":     "در حال پردازش...",
-                      "sSearch":         "جستجو:",
-                      "sZeroRecords":    "رکوردی با این مشخصات پیدا نشد",
-                      "oPaginate": {
-                        "sFirst":    "ابتدا",
-                        "sLast":     "انتها",
-                        "sNext":     "بعدی",
-                        "sPrevious": "قبلی"
-                      },
-                      "oAria": {
-                        "sSortAscending":  ": فعال سازی نمایش به صورت صعودی",
-                        "sSortDescending": ": فعال سازی نمایش به صورت نزولی"
-                      }
-                    },
-                  });
-                  }
-                });
-              });
-              $('[data-remodal-id=modal]').remodal();
             });
+            $('[data-remodal-id=modal]').remodal();
+             $('#trackForm').on('submit', function(e){
+             e.preventDefault(); 
+              alert("Not Now");
+             });
+          });
 </script>
 
 <?php $__env->stopSection(); ?>
