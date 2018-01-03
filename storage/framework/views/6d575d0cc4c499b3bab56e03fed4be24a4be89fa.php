@@ -191,7 +191,7 @@
               if (!e.ctrlKey) {
                 toastr.warning('تنها عدد مجاز است');
               }
-             
+              
               e.preventDefault();
             }
             if ($('#Consignment').val().length >= 17) {
@@ -231,72 +231,72 @@
             });
               $('#newComplaintForm').on('submit', function(e){ 
                $('#Consignment').val($('#Consignment').val().toEnDigit());               
-                e.preventDefault();
-                if ($('#Consignment').val().length < 17) {
-                  toastr.error('! شماره بارنامه کمتر از ۱۷ رقم است ');
-                  return 0;
-                }
-                if (!$.trim($("#Description").val())) {
-                  toastr.error('! توضیحات را وارد کنید');
-                  return 0;
-                }
-               
-                if ($("input[name='Registrar']:checked").val()==undefined) {
-                  toastr.error('! نماینده یا مشتری را مشخص نمایید ');
-                  return 0;
-                }
-                if ($('#Consignment').val().substr(0,7)!=5410000 || $('#Consignment').val().substr(14,3)!=101 ){
-                  toastr.error('فرمت بارنامه درست نیست',$('#Consignment').val());
-                  return 0;
-                }
-               
-                $.ajax({
-                  type: 'GET',
-                  url: '/newComplaint',
-                  data: $('#newComplaintForm').serialize(),
-                  success: function(data) {
-                    $('#DataTable_wrapper').remove();
-                    $('.box-body').prepend(data);
-                    MainDataTable=  $('#DataTable').DataTable({
-                     aaSorting: [[6, 'desc']],
-                     "language": {
-                      "sEmptyTable":     "هیچ داده ای در جدول وجود ندارد",
-                      "sInfo":           "نمایش _START_ تا _END_ از _TOTAL_ رکورد",
-                      "sInfoEmpty":      "نمایش 0 تا 0 از 0 رکورد",
-                      "sInfoFiltered":   "(فیلتر شده از _MAX_ رکورد)",
-                      "sInfoPostFix":    "",
-                      "sInfoThousands":  ",",
-                      "sLengthMenu":     "نمایش _MENU_ رکورد",
-                      "sLoadingRecords": "در حال بارگزاری...",
-                      "sProcessing":     "در حال پردازش...",
-                      "sSearch":         "جستجو:",
-                      "sZeroRecords":    "رکوردی با این مشخصات پیدا نشد",
-                      "oPaginate": {
-                        "sFirst":    "ابتدا",
-                        "sLast":     "انتها",
-                        "sNext":     "بعدی",
-                        "sPrevious": "قبلی"
-                      },
-                      "oAria": {
-                        "sSortAscending":  ": فعال سازی نمایش به صورت صعودی",
-                        "sSortDescending": ": فعال سازی نمایش به صورت نزولی"
-                      }
+               e.preventDefault();
+               if ($('#Consignment').val().length < 17) {
+                toastr.error('! شماره بارنامه کمتر از ۱۷ رقم است ');
+                return 0;
+              }
+              if (!$.trim($("#Description").val())) {
+                toastr.error('! توضیحات را وارد کنید');
+                return 0;
+              }
+              
+              if ($("input[name='Registrar']:checked").val()==undefined) {
+                toastr.error('! نماینده یا مشتری را مشخص نمایید ');
+                return 0;
+              }
+              if ($('#Consignment').val().substr(0,7)!=5410000 || $('#Consignment').val().substr(14,3)!=101 ){
+                toastr.error('فرمت بارنامه درست نیست',$('#Consignment').val());
+                return 0;
+              }
+              
+              $.ajax({
+                type: 'GET',
+                url: '/newComplaint',
+                data: $('#newComplaintForm').serialize(),
+                success: function(data) {
+                  $('#DataTable_wrapper').remove();
+                  $('.box-body').prepend(data);
+                  MainDataTable=  $('#DataTable').DataTable({
+                   aaSorting: [[6, 'desc']],
+                   "language": {
+                    "sEmptyTable":     "هیچ داده ای در جدول وجود ندارد",
+                    "sInfo":           "نمایش _START_ تا _END_ از _TOTAL_ رکورد",
+                    "sInfoEmpty":      "نمایش 0 تا 0 از 0 رکورد",
+                    "sInfoFiltered":   "(فیلتر شده از _MAX_ رکورد)",
+                    "sInfoPostFix":    "",
+                    "sInfoThousands":  ",",
+                    "sLengthMenu":     "نمایش _MENU_ رکورد",
+                    "sLoadingRecords": "در حال بارگزاری...",
+                    "sProcessing":     "در حال پردازش...",
+                    "sSearch":         "جستجو:",
+                    "sZeroRecords":    "رکوردی با این مشخصات پیدا نشد",
+                    "oPaginate": {
+                      "sFirst":    "ابتدا",
+                      "sLast":     "انتها",
+                      "sNext":     "بعدی",
+                      "sPrevious": "قبلی"
                     },
-                  });
-
-                    var inst = $('[data-remodal-id=createModal]').remodal();
-                    inst.close();
-                    $('[data-remodal-id=createModal] input[type="text"]').val('');
-                    $('[data-remodal-id=createModal] textarea').val('');
-                    $('[data-remodal-id=createModal] input[type="radio"]').prop('checked', false);
-
-                    toastr.success('شکایت با موفقیت ثبت شد', {timeOut: 7000});
-
-
-                  }
-
+                    "oAria": {
+                      "sSortAscending":  ": فعال سازی نمایش به صورت صعودی",
+                      "sSortDescending": ": فعال سازی نمایش به صورت نزولی"
+                    }
+                  },
                 });
+
+                  var inst = $('[data-remodal-id=createModal]').remodal();
+                  inst.close();
+                  $('[data-remodal-id=createModal] input[type="text"]').val('');
+                  $('[data-remodal-id=createModal] textarea').val('');
+                  $('[data-remodal-id=createModal] input[type="radio"]').prop('checked', false);
+
+                  toastr.success('شکایت با موفقیت ثبت شد', {timeOut: 7000});
+
+
+                }
+
               });
+            });
 
 
               $(document).on('click', '.deleteComplainBtn', function(e) {
@@ -315,9 +315,10 @@
                      historyTable.row(selRow).remove().draw();
                      if (!(historyTable.rows().any())) {
                        MainDataTable.row( $target ).remove().draw();
+                       var inst = $('[data-remodal-id=modal]').remodal();
+                       inst.close();
                      }
-                     var inst = $('[data-remodal-id=modal]').remodal();
-                     inst.close();
+                     
                    });
                    toastr.success('شکایت با موفقیت حذف شد ', {timeOut: 7000});
                    $globHistory="";
@@ -391,7 +392,7 @@
                   },
                   success: function(data){
                     toastr.success('بارنامه '+": "+$con, 'وضعیت شکایت تغیر پیدا کرد', {timeOut: 7000});
-                     $('#DataTable_wrapper').remove();
+                    $('#DataTable_wrapper').remove();
                     $('.box-body').prepend(data);
                     MainDataTable=  $('#DataTable').DataTable({
                      aaSorting: [[6, 'desc']],
