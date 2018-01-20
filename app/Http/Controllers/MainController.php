@@ -152,7 +152,7 @@ class MainController extends Controller
 	}
 	public function hasComplain($id){
 		header("Access-Control-Allow-Origin: *");
-		$Complaint= Complaints::where('fld_Consignment','=',$id)->first();
+		$Complaint= Complaints::where([['fld_Consignment','=',$id],['fld_Suspend','=',false]])->first();
 		if (!empty($Complaint)) {
 			return response()->json([
 				'result' => true

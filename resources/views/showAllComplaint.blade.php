@@ -78,7 +78,7 @@
             @endforeach
             </tbody>
             </table>
-            <form method="get" id="trackForm" action="#" style="display:inline-block;float:left">
+            <form method="get" id="trackForm" action="#" style="display:inline-block;float:left;display:none;">
             <button type="submit" class="btn btn-default btn-sm newTrack" style="background-color: #239D60;font-size: 13px;height: 32px;margin-top: 7px;color: white;" type="button">
             <span style="vertical-align: -2px;" class="glyphicon glyphicon-search"></span> پیگیری
             </button>

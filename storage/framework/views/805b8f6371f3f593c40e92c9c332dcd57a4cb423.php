@@ -77,11 +77,10 @@
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </tbody>
             </table>
-            <form method="get" id="trackForm" action="#" style="display:inline-block;float:left">
+            <form method="get" id="trackForm" action="#" style="display:inline-block;float:left;display:none;">
             <button type="submit" class="btn btn-default btn-sm newTrack" style="background-color: #239D60;font-size: 13px;height: 32px;margin-top: 7px;color: white;" type="button">
             <span style="vertical-align: -2px;" class="glyphicon glyphicon-search"></span> پیگیری
             </button>
-
             <input placeholder="شماره بارنامه" name="Consignment" style="line-height: 25px;  direction: ltr;">
             </form>
             <button class="btn btn-default btn-sm newComplaint" style="     background-color: #239D60;font-size: 13px;height: 32px;margin-top: 5px;color: white;" type="button">
@@ -97,16 +96,12 @@
             <h4 style="margin: 0 auto;margin-bottom: 15px">: تاریخچه شکایات بارنامه <span id="selConsignment" style="color:#3c8dbc;font-weight: bold;"></span></h4>
             <div id="modalTable">
             </div>
-
-
             <br>
             </div>
-
-
             <div class="remodal" data-remodal-id="createModal" style="max-width: 100%;width: 95%;">
             <button data-remodal-action="close" class="remodal-close"></button>
             <h4 style="margin: 0 auto;margin-bottom: 15px;text-align:center;color:#2196F3">ثبت شکایت جدید<span id="selConsignment" style="color:#3c8dbc;font-weight: bold;"></span></h4>
-            <div id="historyContainer"></div>
+            <iframe id="historyContainer" src="All" style="height : 460px;width: 100%;display:none;"></iframe>
             <form id="newComplaintForm" action="newComplaint" method="get" style="text-align:right;">
             <div class="form-group">
             <?php echo e(csrf_field()); ?>
@@ -116,7 +111,7 @@
             <span style="vertical-align: -2px;" class="glyphicon glyphicon-search"></span> پیگیری
             </button>
             <label for="Consignment" class="formHeader">: شماره بارنامه</label>
-            <input autocomplete="off" style="direction:ltr"  type="text" class="form-control" name="Consignment" id="Consignment" placeholder="بارنامه">
+            <input autocomplete="off" style="direction:ltr"  type="text" class="form-control" name="Consignment" id="Consignment" <?php if($createSpcCom!=false): ?> value="<?php echo e($createSpcCom); ?>"  <?php endif; ?> placeholder="بارنامه">
             </div>
             <div class="form-group">
 
@@ -152,6 +147,10 @@
             </div>
             <?php $__env->startSection('extensions'); ?>
             <script>
+             <?php if($createSpcCom!=false): ?> 
+            var instt = $('[data-remodal-id=createModal]').remodal();
+            instt.open();
+              <?php endif; ?> 
             $(function () {
              var $globBtn;
              String.prototype.toEnDigit = function() {
@@ -269,7 +268,7 @@
               }
             });
          //CheckExsist
-          $.when( d1 ).done(function ( ) {
+            $.when( d1 ).done(function ( ) {
               if (CheckConExsist) {
                 $.ajax({
                   type: 'GET',
@@ -348,13 +347,14 @@
               var inst = $('[data-remodal-id=createModal]').remodal();
               $('[data-remodal-id=createModal]').find('#Consignment').val('');
               inst.open();
-              $('#historyContainer').text("");
+              $('#historyContainer').hide();
             });
             $(document).on('click', '.newComplaintSpc', function(e) {
               var inst = $('[data-remodal-id=createModal]').remodal();
               $('[data-remodal-id=createModal]').find('#Consignment').val($(this).attr('value'));
               inst.open();
-              $('#historyContainer').text("");
+              $('#historyContainer').hide();
+
             });
             $(document).on('click', '.history', function(e) {
              $id= $(this).attr('value') ;
@@ -459,39 +459,16 @@
             $('#newTrack').on('click', function(e){
              e.preventDefault();
              $('#laoderImage').show();
-             $.ajax({
-              method: "GET",
-              dataType:'json',
-              url: "http://portal.parschapar.local/api/tracking-api.php",
-              data: {
-                consignment_no: $('[data-remodal-id=createModal]').find('#Consignment').val()
-              },
-              success: function(data){
+             var consignment_no= $('[data-remodal-id=createModal]').find('#Consignment').val();
+             $("#historyContainer").attr("src", "http://portal.parschapar.local/following.php?tracking="+consignment_no);
+             $('#historyContainer').load(function(){
+               $('#historyContainer').show();
                 $('#laoderImage').hide();
-                if (data.result==0) {
-                 alert("اطلاعاتی براای این بارنامه وجود ندارد .");
-               }else{
-                $('#historyContainer').text("");
-                $('#historyContainer').append("<div>شماره بارنامه : "+$('[data-remodal-id=createModal]').find('#Consignment').val()+"</div>");
-                $('#historyContainer').append("<div>شهر مبدا : "+data.cn.origin_city+"</div>");
-                $('#historyContainer').append("<div>شهر مقصد : "+data.cn.destination_city+"</div>");
-                $('#historyContainer').append("<div>تحویل گیرنده : "+data.delivery_person+"</div>");
-                $('#historyContainer').append("<div>زمان تحویل : "+data.delivery_time+"</div>");
-                $('#historyContainer').append("<h2 style='text-align:center;'>جزییات</h2>");
-                var table="<table width='80%' align='center' style='text-align:right'>";
-                table+="<thead><th style='padding-right:5px;'>وضعیت</th><th style='padding-right:5px;'>مکان</th><th style='padding-right:5px;'>زمان</th></thead>";
-                table+='<tbody>';
-                $.each(data.history, function (index, history) {
-                 table+="<tr><td>"+history.status+"</td><td>"+history.loc+"</td><td>"+history.date+"</td></tr>";
-               });
-                table+="</tbody></table>";
-                $('#historyContainer').append(table);
-              }
-            }
-          });
+             });
            });
           });
 </script>
 
 <?php $__env->stopSection(); ?>
+
 <?php echo $__env->make('struct', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
