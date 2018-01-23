@@ -62,7 +62,7 @@
             <option @if ($complaints->fld_Level==3) selected="true" @endif value="3"> به اتمام رسیده</option>
             </select>
             </th>
-            <th>
+            <th style="width:195px;">
             <button  value="{{$complaints->fld_Id}}" style="display: none;background-color: tomato;color: white" type="button" class="btn btn-default btn-sm deleteComplainBtn">
             <span class="glyphicon glyphicon-trash"></span> حذف
             </button>
