@@ -61,6 +61,11 @@
             </div>
           
     </body>
+ <a id="newComplaintLink">
+        <button class="btn btn-default btn-sm newComplaint" style="     background-color: #239D60;font-size: 13px;height: 32px;margin-top: 5px;color: white;" type="button">
+            <span style="vertical-align: -2px;" class="glyphicon glyphicon-plus"></span> شکایت جدید
+            </button>
+            </a>
     <footer>
 
  <!-- jQuery 2.2.0 -->
@@ -73,7 +78,7 @@
 
 <script >
 $( document ).ready(function() {
-
+  $('#newComplaintLink').attr('href',"http://192.168.0.37/?userId=12&userName=Ali&consignment="+($('.consignment').text()));
   var  MainDataTable=  $('#DataTable').DataTable({
                  aaSorting: [[6, 'desc']],
                  "language": {
