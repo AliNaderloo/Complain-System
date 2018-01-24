@@ -78,7 +78,7 @@
 
 <script >
 $( document ).ready(function() {
-  $('#newComplaintLink').attr('href',"http://192.168.0.37/?userId=12&userName=Ali&consignment="+($('.consignment').text()));
+  $('#newComplaintLink').attr('href',"http://192.168.0.37/?userId=12&userName=Ali&consignment="+($('.consignment').first().text()));
   var  MainDataTable=  $('#DataTable').DataTable({
                  aaSorting: [[6, 'desc']],
                  "language": {
