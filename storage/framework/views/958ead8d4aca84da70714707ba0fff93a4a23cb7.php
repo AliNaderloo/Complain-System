@@ -296,6 +296,31 @@
              $('#laoderImage').hide();
            });
          });
+            $(document).on('click', '.deleteComplainBtn', function(e) {
+             $id= $(this).attr('value');
+             $btn=$(this);
+             $.ajax({
+               method: "get",
+               url: "<?php echo e(URL::to('/RemoveComplaint')); ?>",
+               data: {
+                 id: $id,
+                 Spc:'Spc'
+               },
+               success: function(data){
+                 $btn.parent().parent().hide('slow', function(){ 
+                   var selRow= $btn.parent().parent().remove();
+                   historyTable.row(selRow).remove().draw();
+                   if (!(historyTable.rows().any())) {
+                     MainDataTable.row( $target ).remove().draw();
+                     var inst = $('[data-remodal-id=modal]').remodal();
+                     inst.close();
+                   }
+                 });
+                 toastr.success('شکایت با موفقیت حذف شد ', {timeOut: 7000});
+                 $globHistory="";
+               }
+             });
+           });
         });
 
 </script>
