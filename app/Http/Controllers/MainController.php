@@ -42,15 +42,19 @@ class MainController extends Controller
 		return view('showAllComplaint')->with('Table', $table->Data())->with('user',$user)->with('Subjects',$Complaints_Subjects)->with('createSpcCom',$createSpcCom);;
 	}
 	public function allSpcComplaint($id){
+		$userId=$_GET['userId'];
+		$userName=$_GET['userName'];
+		session(['user' => $userId]);
+		session(['name' => $userName]);	
 		$Complaints_Subjects=Complaints_Subjects::where('fld_Suspend', '=',false)->get();
 		$Complaints = DB::table('tbl_complaints')->where('tbl_complaints.fld_Suspend','=',false)->where('fld_Consignment','=',$id)->join('tbl_complaints_subjects', 'tbl_complaints.fld_Subject', '=', 'tbl_complaints_subjects.fld_Id')->orderBy('tbl_complaints.created_at','desc')->select('tbl_complaints.*', 'tbl_complaints_subjects.fld_Complaints_Subjects')->get();
 		foreach ($Complaints as $Complaint) {
 			$Complaintcount=Complaints::where([['fld_Consignment','=',$Complaint->fld_Consignment],['fld_Suspend','=',false]])->count();
 			$Complaint->count=$Complaintcount;
 		}
-		$user=session('user');
-		$table = new DataTable2(array('شماره بارنامه', 'موضوع', 'توضیحات','از طرف',' توسط','تاریخ ثبت','مرحله'),$Complaints);
-		return view('showAllSpcComplaint')->with('Table', $table->Data())->with('user',$user)->with('Subjects',$Complaints_Subjects);
+		$createSpcCom =$id;
+		$table = new DataTable2(array('شماره بارنامه', 'موضوع', 'توضیحات','از طرف',' توسط','تاریخ ثبت','مرحله','اقدامات'),$Complaints);
+		return view('showAllSpcComplaint')->with('Table', $table->Data())->with('Subjects',$Complaints_Subjects)->with('createSpcCom',$createSpcCom);
 	}
 	public function addComplaint(){
 		$Complaints=Complaints_Subjects::where('fld_Suspend', '=',false)->get();
@@ -76,8 +80,15 @@ class MainController extends Controller
 				$Complaintcount=Complaints::where([['fld_Consignment','=',$Complaint->fld_Consignment],['fld_Suspend','=',false]])->count();
 				$Complaint->count=$Complaintcount;
 			}
-			$table = new DataTable2(array('شماره بارنامه', 'موضوع', 'توضیحات','از طرف',' توسط','تاریخ ثبت','مرحله'),$Complaints);
-			return view('refreshComplaint')->with('Table', $table->Data())->with('user',$user)->with('Subjects',$Complaints_Subjects)->render();
+			if($req->input('Spc')!="Spc"){
+				$table = new DataTable2(array('شماره بارنامه', 'موضوع', 'توضیحات','از طرف',' توسط','تاریخ ثبت','مرحله'),$Complaints);
+				return view('refreshComplaint')->with('Table', $table->Data())->with('user',$user)->with('Subjects',$Complaints_Subjects)->render();
+			}else{
+			$Complaints = DB::table('tbl_complaints')->where('tbl_complaints.fld_Suspend','=',false)->where('fld_Consignment','=',$req->input('Consignment'))->join('tbl_complaints_subjects', 'tbl_complaints.fld_Subject', '=', 'tbl_complaints_subjects.fld_Id')->orderBy('tbl_complaints.created_at','desc')->select('tbl_complaints.*', 'tbl_complaints_subjects.fld_Complaints_Subjects')->get();
+				$table = new DataTable2(array('شماره بارنامه', 'موضوع', 'توضیحات','از طرف',' توسط','تاریخ ثبت','مرحله','اقدامات'),$Complaints);
+				return view('refreshComplaintSpc')->with('Table', $table->Data())->with('createSpcCom',$req->input('Consignment'))->with('user',$user)->with('Subjects',$Complaints_Subjects)->render();
+			}
+			
 
 		}
 	}
