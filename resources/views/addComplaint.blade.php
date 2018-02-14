@@ -2,12 +2,11 @@
 <html>
 <head>
 	<title></title>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="{{ asset('js/jquery.min.js') }}"></script>
   <link  rel="stylesheet" type="text/css" href="{{URL::asset('css/Style.css')}}"></link>
   <link  rel="stylesheet" type="text/css" href="{{URL::asset('css/bootstrap.css')}}"></link>
-  <script type="text/javascript" src="{{URL::asset('js/bootstrap.min.js')}}"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" integrity="sha256-ENFZrbVzylNbgnXx0n3I1g//2WeO47XxoPe0vkp3NC8=" crossorigin="anonymous" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js" integrity="sha256-3blsJd4Hli/7wCQ+bmgXfOdK7p/ZUMtPXY08jmxSSgk=" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="{{URL::asset('css/bootstrap.min.js')}}"></script>
+  <link rel="stylesheet" href="{{ asset('css/jtoastr.min.css') }}" />
 
   <style type="text/css">
   body {
