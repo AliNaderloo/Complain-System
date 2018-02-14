@@ -178,7 +178,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Morilog\Jalali\JalaliServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
-
+        Yajra\DataTables\HtmlServiceProvider::class,
     ],
 
     /*

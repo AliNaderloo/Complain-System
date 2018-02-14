@@ -27,12 +27,16 @@
     23 => 'Laravel\\Tinker\\TinkerServiceProvider',
     24 => 'Morilog\\Jalali\\JalaliServiceProvider',
     25 => 'Intervention\\Image\\ImageServiceProvider',
-    26 => 'App\\Providers\\AppServiceProvider',
-    27 => 'App\\Providers\\AuthServiceProvider',
-    28 => 'App\\Providers\\EventServiceProvider',
-    29 => 'App\\Providers\\RouteServiceProvider',
-    30 => 'Morilog\\Jalali\\JalaliServiceProvider',
-    31 => 'Intervention\\Image\\ImageServiceProvider',
+    26 => 'Yajra\\DataTables\\DataTablesServiceProvider',
+    27 => 'Collective\\Html\\HtmlServiceProvider',
+    28 => 'Yajra\\DataTables\\HtmlServiceProvider',
+    29 => 'App\\Providers\\AppServiceProvider',
+    30 => 'App\\Providers\\AuthServiceProvider',
+    31 => 'App\\Providers\\EventServiceProvider',
+    32 => 'App\\Providers\\RouteServiceProvider',
+    33 => 'Morilog\\Jalali\\JalaliServiceProvider',
+    34 => 'Intervention\\Image\\ImageServiceProvider',
+    35 => 'Yajra\\DataTables\\HtmlServiceProvider',
   ),
   'eager' => 
   array (
@@ -49,12 +53,15 @@
     10 => 'Fideloper\\Proxy\\TrustedProxyServiceProvider',
     11 => 'Morilog\\Jalali\\JalaliServiceProvider',
     12 => 'Intervention\\Image\\ImageServiceProvider',
-    13 => 'App\\Providers\\AppServiceProvider',
-    14 => 'App\\Providers\\AuthServiceProvider',
-    15 => 'App\\Providers\\EventServiceProvider',
-    16 => 'App\\Providers\\RouteServiceProvider',
-    17 => 'Morilog\\Jalali\\JalaliServiceProvider',
-    18 => 'Intervention\\Image\\ImageServiceProvider',
+    13 => 'Yajra\\DataTables\\DataTablesServiceProvider',
+    14 => 'Yajra\\DataTables\\HtmlServiceProvider',
+    15 => 'App\\Providers\\AppServiceProvider',
+    16 => 'App\\Providers\\AuthServiceProvider',
+    17 => 'App\\Providers\\EventServiceProvider',
+    18 => 'App\\Providers\\RouteServiceProvider',
+    19 => 'Morilog\\Jalali\\JalaliServiceProvider',
+    20 => 'Intervention\\Image\\ImageServiceProvider',
+    21 => 'Yajra\\DataTables\\HtmlServiceProvider',
   ),
   'deferred' => 
   array (
@@ -155,6 +162,10 @@
     'validator' => 'Illuminate\\Validation\\ValidationServiceProvider',
     'validation.presence' => 'Illuminate\\Validation\\ValidationServiceProvider',
     'command.tinker' => 'Laravel\\Tinker\\TinkerServiceProvider',
+    'html' => 'Collective\\Html\\HtmlServiceProvider',
+    'form' => 'Collective\\Html\\HtmlServiceProvider',
+    'Collective\\Html\\HtmlBuilder' => 'Collective\\Html\\HtmlServiceProvider',
+    'Collective\\Html\\FormBuilder' => 'Collective\\Html\\HtmlServiceProvider',
   ),
   'when' => 
   array (
@@ -195,6 +206,9 @@
     array (
     ),
     'Laravel\\Tinker\\TinkerServiceProvider' => 
+    array (
+    ),
+    'Collective\\Html\\HtmlServiceProvider' => 
     array (
     ),
   ),

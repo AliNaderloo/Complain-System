@@ -61,7 +61,6 @@ class MainController extends Controller
 		return view('addComplaint')->with('Complaints',$Complaints);
 	}
 	public function newComplaint( Request $req){
-
 		if (!empty($req->input('Complaints'))&&!empty($req->input('Consignment'))&&!empty($req->input('Description'))&&!empty($req->input('Registrar'))) {
 			$complaint=new Complaints;
 			$user=session('user');
@@ -84,7 +83,7 @@ class MainController extends Controller
 				$table = new DataTable2(array('شماره بارنامه', 'موضوع', 'توضیحات','از طرف',' توسط','تاریخ ثبت','مرحله'),$Complaints);
 				return view('refreshComplaint')->with('Table', $table->Data())->with('user',$user)->with('Subjects',$Complaints_Subjects)->render();
 			}else{
-			$Complaints = DB::table('tbl_complaints')->where('tbl_complaints.fld_Suspend','=',false)->where('fld_Consignment','=',$req->input('Consignment'))->join('tbl_complaints_subjects', 'tbl_complaints.fld_Subject', '=', 'tbl_complaints_subjects.fld_Id')->orderBy('tbl_complaints.created_at','desc')->select('tbl_complaints.*', 'tbl_complaints_subjects.fld_Complaints_Subjects')->get();
+				$Complaints = DB::table('tbl_complaints')->where('tbl_complaints.fld_Suspend','=',false)->where('fld_Consignment','=',$req->input('Consignment'))->join('tbl_complaints_subjects', 'tbl_complaints.fld_Subject', '=', 'tbl_complaints_subjects.fld_Id')->orderBy('tbl_complaints.created_at','desc')->select('tbl_complaints.*', 'tbl_complaints_subjects.fld_Complaints_Subjects')->get();
 				$table = new DataTable2(array('شماره بارنامه', 'موضوع', 'توضیحات','از طرف',' توسط','تاریخ ثبت','مرحله','اقدامات'),$Complaints);
 				return view('refreshComplaintSpc')->with('Table', $table->Data())->with('createSpcCom',$req->input('Consignment'))->with('user',$user)->with('Subjects',$Complaints_Subjects)->render();
 			}
