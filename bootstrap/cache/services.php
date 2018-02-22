@@ -36,7 +36,7 @@
     32 => 'App\\Providers\\RouteServiceProvider',
     33 => 'Morilog\\Jalali\\JalaliServiceProvider',
     34 => 'Intervention\\Image\\ImageServiceProvider',
-    35 => 'Yajra\\DataTables\\HtmlServiceProvider',
+    35 => 'Yajra\\DataTables\\DataTablesServiceProvider',
   ),
   'eager' => 
   array (
@@ -61,7 +61,7 @@
     18 => 'App\\Providers\\RouteServiceProvider',
     19 => 'Morilog\\Jalali\\JalaliServiceProvider',
     20 => 'Intervention\\Image\\ImageServiceProvider',
-    21 => 'Yajra\\DataTables\\HtmlServiceProvider',
+    21 => 'Yajra\\DataTables\\DataTablesServiceProvider',
   ),
   'deferred' => 
   array (

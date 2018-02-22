@@ -11,6 +11,9 @@ table,tr, th, td {
   display: inline-block;
   margin: 0 15px;
 }
+.level{
+.background-color:#3c8dbc;color: white; background-color:#3c8dbc;color: white;
+}
 p{
   word-break: break-all;
 }
@@ -24,12 +27,19 @@ p{
  width: 20px;
 }
 .history{
-    float: left;
     margin-top: 5px;
     width: 98px;
+    background-color: #545454;color: white
+}
+.history span{
+  margin-right: 5px;
 }
 .newComplaintSpc{
     width: 96px;
+         background-color: #239D60;font-size: 13px;height: 32px;margin-top: 5px;color: white;
+}
+.newComplaintSpc span{
+vertical-align: -2px;
 }
 thead tr{
   background-color: #3c8dbc;

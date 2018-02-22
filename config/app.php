@@ -178,7 +178,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Morilog\Jalali\JalaliServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
-        Yajra\DataTables\HtmlServiceProvider::class,
+        Yajra\DataTables\DataTablesServiceProvider::class,
     ],
 
     /*
@@ -232,7 +232,7 @@ return [
         'Modal' => App\Classes\Modal::class,
         'jDate' => Morilog\Jalali\Facades\jDate::class,
         'Image' => Intervention\Image\Facades\Image::class,
-
+        'DataTables' => Yajra\DataTables\Facades\DataTables::class,
     ],
 
 ];

@@ -35,5 +35,6 @@ Route::get('RemoveSubject', 'MainController@RemoveSubject');
 Route::get('RemoveComplaint','MainController@removeComplaint');
 Route::get('ComplaintHistory','MainController@complaintHistory');
 Route::get('/HasComplain/{id}', 'MainController@hasComplain');
+Route::get('DataTable','MainController@dataTable');
 
 	//});

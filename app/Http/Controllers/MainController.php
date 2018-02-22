@@ -15,6 +15,8 @@ use Response;
 use Image;
 use File;
 use DB;
+use Datatables;
+
 class MainController extends Controller
 {
 	public function setUser(){
@@ -28,6 +30,21 @@ class MainController extends Controller
 			return Redirect::route('allComplaint', ['createSpcCom' => false]);
 		}
 		
+	}
+	public function dataTable(){
+		$records=DB::table('tbl_complaints')->whereRaw('tbl_complaints.created_at in (select max(created_at) from tbl_complaints where tbl_complaints.fld_Suspend = false group by (fld_Consignment))')->join('tbl_complaints_subjects', 'tbl_complaints.fld_Subject', '=', 'tbl_complaints_subjects.fld_Id')->orderBy('tbl_complaints.created_at','desc')->select('tbl_complaints.*', 'tbl_complaints_subjects.fld_Complaints_Subjects')->get();
+		foreach ($records as $record ) {
+			$record->created_at=jDate::forge($record->created_at)->format('%y/%m/%d %H:%M');
+			if ($record->fld_Registrar==1) {
+				$record->fld_Registrar="نماینده";
+			}else{
+				$record->fld_Registrar="مشتری";
+			}
+			$Complaintcount=Complaints::where([['fld_Consignment','=',$record->fld_Consignment],['fld_Suspend','=',false]])->count();
+			$record->count=$Complaintcount;
+			
+		}
+		return datatables()->of($records)->addColumn('options', '')->addIndexColumn()->toJson();
 	}
 	public function allComplaint(Request $req){
 		$createSpcCom= $req->input('createSpcCom');
@@ -73,21 +90,7 @@ class MainController extends Controller
 			$complaint->fld_Registrar=$req->input('Registrar');
 			$complaint->fld_Level=1;
 			$complaint->save();
-			$Complaints_Subjects=Complaints_Subjects::where('fld_Suspend', '=',false)->get();
-			$Complaints = DB::table('tbl_complaints')->whereRaw('tbl_complaints.created_at in (select max(created_at) from tbl_complaints where tbl_complaints.fld_Suspend = false group by (fld_Consignment))')->join('tbl_complaints_subjects', 'tbl_complaints.fld_Subject', '=', 'tbl_complaints_subjects.fld_Id')->orderBy('tbl_complaints.created_at','desc')->select('tbl_complaints.*', 'tbl_complaints_subjects.fld_Complaints_Subjects')->get();
-			foreach ($Complaints as $Complaint) {
-				$Complaintcount=Complaints::where([['fld_Consignment','=',$Complaint->fld_Consignment],['fld_Suspend','=',false]])->count();
-				$Complaint->count=$Complaintcount;
-			}
-			if($req->input('Spc')!="Spc"){
-				$table = new DataTable2(array('شماره بارنامه', 'موضوع', 'توضیحات','از طرف',' توسط','تاریخ ثبت','مرحله'),$Complaints);
-				return view('refreshComplaint')->with('Table', $table->Data())->with('user',$user)->with('Subjects',$Complaints_Subjects)->render();
-			}else{
-				$Complaints = DB::table('tbl_complaints')->where('tbl_complaints.fld_Suspend','=',false)->where('fld_Consignment','=',$req->input('Consignment'))->join('tbl_complaints_subjects', 'tbl_complaints.fld_Subject', '=', 'tbl_complaints_subjects.fld_Id')->orderBy('tbl_complaints.created_at','desc')->select('tbl_complaints.*', 'tbl_complaints_subjects.fld_Complaints_Subjects')->get();
-				$table = new DataTable2(array('شماره بارنامه', 'موضوع', 'توضیحات','از طرف',' توسط','تاریخ ثبت','مرحله','اقدامات'),$Complaints);
-				return view('refreshComplaintSpc')->with('Table', $table->Data())->with('createSpcCom',$req->input('Consignment'))->with('user',$user)->with('Subjects',$Complaints_Subjects)->render();
-			}
-			
+					
 
 		}
 	}
