@@ -115,55 +115,61 @@
      processing: true,
      serverSide: true,
      dataType: "json",
-      aaSorting: [[6, 'desc']],
-   "language": {
-    "sEmptyTable":     "هیچ داده ای در جدول وجود ندارد",
-    "sInfo":           "نمایش _START_ تا _END_ از _TOTAL_ رکورد",
-    "sInfoEmpty":      "نمایش 0 تا 0 از 0 رکورد",
-    "sInfoFiltered":   "(فیلتر شده از _MAX_ رکورد)",
-    "sInfoPostFix":    "",
-    "sInfoThousands":  ",",
-    "sLengthMenu":     "نمایش _MENU_ رکورد",
-    "sLoadingRecords": "در حال بارگزاری...",
-    "sProcessing":     "در حال پردازش...",
-    "sSearch":         "جستجو:",
-    "sZeroRecords":    "رکوردی با این مشخصات پیدا نشد",
-    "oPaginate": {
-      "sFirst":    "ابتدا",
-      "sLast":     "انتها",
-      "sNext":     "بعدی",
-      "sPrevious": "قبلی"
-    },
-    "oAria": {
-      "sSortAscending":  ": فعال سازی نمایش به صورت صعودی",
-      "sSortDescending": ": فعال سازی نمایش به صورت نزولی"
-    }},
-     'ajax'       : {
-      "type"   : "GET",
-      "url"    : "/DataTable",
-      "dataSrc": function (json) {
-        var return_data = new Array();
-        var selected1="";
-        var selected2="";
-        var selected3="";
-        for(var i=0;i< json.data.length; i++){
-
+     aaSorting: [[6, 'desc']],
+     "language": {
+      "sEmptyTable":     "هیچ داده ای در جدول وجود ندارد",
+      "sInfo":           "نمایش _START_ تا _END_ از _TOTAL_ رکورد",
+      "sInfoEmpty":      "نمایش 0 تا 0 از 0 رکورد",
+      "sInfoFiltered":   "(فیلتر شده از _MAX_ رکورد)",
+      "sInfoPostFix":    "",
+      "sInfoThousands":  ",",
+      "sLengthMenu":     "نمایش _MENU_ رکورد",
+      "sLoadingRecords": "در حال بارگزاری...",
+      "sProcessing":     "در حال پردازش...",
+      "sSearch":         "جستجو:",
+      "sZeroRecords":    "رکوردی با این مشخصات پیدا نشد",
+      "oPaginate": {
+        "sFirst":    "ابتدا",
+        "sLast":     "انتها",
+        "sNext":     "بعدی",
+        "sPrevious": "قبلی"
+      },
+      "oAria": {
+        "sSortAscending":  ": فعال سازی نمایش به صورت صعودی",
+        "sSortDescending": ": فعال سازی نمایش به صورت نزولی"
+      }},
+      'ajax'       : {
+        "type"   : "GET",
+        "url"    : "/DataTable",
+        "dataSrc": function (json) {
+          var return_data = new Array();
+          var selected1="";
+          var selected2="";
+          var selected3="";
+          for(var i=0;i< json.data.length; i++){
+          //  alert(json.data[i].fld_Level);
            switch (json.data[i].fld_Level ){
-            case '1':
+            case 1:
             selected1="selected ="+'"'+"ture"+'"';
             selected2="";
             selected3="";
             break;
-            case '2':
+            case 2:
             selected1="";
             selected2="selected ="+'"'+"true"+'"';
             selected3="";
             break;
-            case '3':
+            case 3:
             selected1="";
             selected2="";
             selected3="selected ="+'"'+"true"+'"';
             break;
+          }
+          var Registrar="";
+          if (json.data.fld_Registrar==1) {
+            Registrar="مشتری";
+          }else{
+             Registrar="نماینده";
           }
           return_data.push({
 
@@ -173,7 +179,7 @@
             'options' :  "<button value ="+'"'+json.data[i].fld_Consignment+'"'+"class ="+'"'+"btn btn-default btn-sm history"+'"'+"><span class="+'"'+"glyphicon glyphicon-repeat"+'"'+"></span> تاریخچه"+"<span class="+'"'+"countOfRecords"+'"'+">"+json.data[i].count+"</span> </button>"+"<button value ="+'"'+json.data[i].fld_Consignment+'"'+"class ="+'"'+"btn btn-default btn-sm newComplaintSpc"+'"'+"><span class="+'"'+"glyphicon glyphicon-plus"+'"'+"></span> شکایت جدید</button>" ,
             'fld_User_Name'  : json.data[i].fld_User_Name,
             'created_at' : json.data[i].created_at,
-            'fld_Registrar':json.data[i].fld_Registrar,
+            'fld_Registrar':Registrar,
             'fld_Consignment':"<span class="+'"'+"consignment"+'"'+">"+json.data[i].fld_Consignment,
             'fld_Description':json.data[i].fld_Description,
             'fld_Complaints_Subjects':json.data[i].fld_Complaints_Subjects,
@@ -193,44 +199,50 @@
     { "data": "created_at" },
     { "data": "fld_Level" },
     { "data": "options" }
-    ]
+    ],
+    "columnDefs": [ {
+      "targets": [0,8],
+      "orderable": false
+    } ]
+
+
   });             
 
- 
-  <?php if($createSpcCom!=false): ?> 
-  var instt = $('[data-remodal-id=createModal]').remodal();
-  instt.open();
-  <?php endif; ?> 
-  $(function () {
-   var $globBtn;
-   String.prototype.toEnDigit = function() {
-    return this.replace(/[\u06F0-\u06F9]+/g, function(digit) {
-      var ret = '';
-      for (var i = 0, len = digit.length; i < len; i++) {
-        ret += String.fromCharCode(digit.charCodeAt(i) - 1728);
-      }
-      return ret;
-    });
-  };
-  toastr.options = {
-    "closeButton": false,
-    "debug": false,
-    "newestOnTop": false,
-    "progressBar": true,
-    "positionClass": "toast-top-left",
-    "preventDuplicates": false,
-    "onclick": null,
-    "showDuration": "300",
-    "hideDuration": "1000",
-    "timeOut": "5000",
-    "extendedTimeOut": "1000",
-    "showEasing": "swing",
-    "hideEasing": "linear",
-    "showMethod": "fadeIn",
-    "hideMethod": "fadeOut"
-  }
+    
+    <?php if($createSpcCom!=false): ?> 
+    var instt = $('[data-remodal-id=createModal]').remodal();
+    instt.open();
+    <?php endif; ?> 
+    $(function () {
+     var $globBtn;
+     String.prototype.toEnDigit = function() {
+      return this.replace(/[\u06F0-\u06F9]+/g, function(digit) {
+        var ret = '';
+        for (var i = 0, len = digit.length; i < len; i++) {
+          ret += String.fromCharCode(digit.charCodeAt(i) - 1728);
+        }
+        return ret;
+      });
+    };
+    toastr.options = {
+      "closeButton": false,
+      "debug": false,
+      "newestOnTop": false,
+      "progressBar": true,
+      "positionClass": "toast-top-left",
+      "preventDuplicates": false,
+      "onclick": null,
+      "showDuration": "300",
+      "hideDuration": "1000",
+      "timeOut": "5000",
+      "extendedTimeOut": "1000",
+      "showEasing": "swing",
+      "hideEasing": "linear",
+      "showMethod": "fadeIn",
+      "hideMethod": "fadeOut"
+    }
 
-  $('#Consignment').keydown(function (e) {
+    $('#Consignment').keydown(function (e) {
         // Allow: backspace, delete, tab, escape, enter and .
         if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
              // Allow: Ctrl+A, Command+A
@@ -254,26 +266,26 @@
           e.preventDefault();
         }
       });
-  $('#newComplaintForm').on('submit', function(e){ 
-   $('#Consignment').val($('#Consignment').val().toEnDigit());               
-   e.preventDefault();
-   if ($('#Consignment').val().length < 17) {
-    toastr.error('! شماره بارنامه کمتر از ۱۷ رقم است ');
-    return 0;
-  }
-  if (!$.trim($("#Description").val())) {
-    toastr.error('! توضیحات را وارد کنید');
-    return 0;
-  }
+    $('#newComplaintForm').on('submit', function(e){ 
+     $('#Consignment').val($('#Consignment').val().toEnDigit());               
+     e.preventDefault();
+     if ($('#Consignment').val().length < 17) {
+      toastr.error('! شماره بارنامه کمتر از ۱۷ رقم است ');
+      return 0;
+    }
+    if (!$.trim($("#Description").val())) {
+      toastr.error('! توضیحات را وارد کنید');
+      return 0;
+    }
 
-  if ($("input[name='Registrar']:checked").val()==undefined) {
-    toastr.error('! نماینده یا مشتری را مشخص نمایید ');
-    return 0;
-  }
-  if ($('#Consignment').val().substr(0,7)!=5410000 || $('#Consignment').val().substr(14,3)!=101 ){
-    toastr.error('فرمت بارنامه درست نیست',$('#Consignment').val());
-    return 0;
-  }
+    if ($("input[name='Registrar']:checked").val()==undefined) {
+      toastr.error('! نماینده یا مشتری را مشخص نمایید ');
+      return 0;
+    }
+    if ($('#Consignment').val().substr(0,7)!=5410000 || $('#Consignment').val().substr(14,3)!=101 ){
+      toastr.error('فرمت بارنامه درست نیست',$('#Consignment').val());
+      return 0;
+    }
           //CheckExsist
           var CheckConExsist=true;
           var d1= $.ajax({
@@ -299,7 +311,7 @@
               url: '/newComplaint',
               data: $('#newComplaintForm').serialize(),
               success: function() {
-              MainDataTable.ajax.reload();
+                MainDataTable.ajax.reload();
                 var inst = $('[data-remodal-id=createModal]').remodal();
                 inst.close();
                 $('[data-remodal-id=createModal] input[type="text"]').val('');
@@ -314,130 +326,130 @@
           }
         });
        });
-  $(document).on('click', '.deleteComplainBtn', function(e) {
-   $id= $(this).attr('value');
-   $target= $( "#DataTable th:contains("+$globHistory+")").parent();
-   $btn=$(this);
-   $globBtn.text($globBtn.text()-1);
-   $.ajax({
-     method: "get",
-     url: "<?php echo e(URL::to('/RemoveComplaint')); ?>",
-     data: {
-       id: $id
-     },
-     success: function(data){
-       $btn.parent().parent().hide('slow', function(){ 
-         var selRow= $btn.parent().parent().remove();
-         historyTable.row(selRow).remove().draw();
-         if (!(historyTable.rows().any())) {
-           MainDataTable.ajax.reload();
-           var inst = $('[data-remodal-id=modal]').remodal();
-           inst.close();
-         }
-       });
-       toastr.success('شکایت با موفقیت حذف شد ', {timeOut: 7000});
-       $globHistory="";
-     }
+    $(document).on('click', '.deleteComplainBtn', function(e) {
+     $id= $(this).attr('value');
+     $target= $( "#DataTable th:contains("+$globHistory+")").parent();
+     $btn=$(this);
+     $globBtn.text($globBtn.text()-1);
+     $.ajax({
+       method: "get",
+       url: "<?php echo e(URL::to('/RemoveComplaint')); ?>",
+       data: {
+         id: $id
+       },
+       success: function(data){
+         $btn.parent().parent().hide('slow', function(){ 
+           var selRow= $btn.parent().parent().remove();
+           historyTable.row(selRow).remove().draw();
+           if (!(historyTable.rows().any())) {
+             MainDataTable.ajax.reload();
+             var inst = $('[data-remodal-id=modal]').remodal();
+             inst.close();
+           }
+         });
+         toastr.success('شکایت با موفقیت حذف شد ', {timeOut: 7000});
+         $globHistory="";
+       }
+     });
    });
- });
-  $(document).on('click', '.newComplaint', function(e) {
-    var inst = $('[data-remodal-id=createModal]').remodal();
-    $('[data-remodal-id=createModal]').find('#Consignment').val('');
-    inst.open();
-    $('#historyContainer').hide();
-  });
-  $(document).on('click', '.newComplaintSpc', function(e) {
-    var inst = $('[data-remodal-id=createModal]').remodal();
-    $('[data-remodal-id=createModal]').find('#Consignment').val($(this).attr('value'));
-    inst.open();
-    $('#historyContainer').hide();
-
-  });
-  $(document).on('click', '.history', function(e) {
-   $id= $(this).attr('value') ;
-   $globHistory=$id;
-   $globBtn=$(this).find('.countOfRecords');
-   $.ajax({
-     method: "GET",
-     url: "<?php echo e(URL::to('/ComplaintHistory')); ?>",
-     data: {
-       id: $id
-     },
-     success: function(data){
-      var inst = $('[data-remodal-id=modal]').remodal();
-      $( "#modalTable" ).append(data);
-      $('#selConsignment').text($id);
-      historyTable = $('#history').DataTable({
-        aaSorting: [[6, 'desc']],
-        "pageLength": 9,
-        "language": {
-          "sEmptyTable":     "هیچ داده ای در جدول وجود ندارد",
-          "sInfo":           "نمایش _START_ تا _END_ از _TOTAL_ رکورد",
-          "sInfoEmpty":      "نمایش 0 تا 0 از 0 رکورد",
-          "sInfoFiltered":   "(فیلتر شده از _MAX_ رکورد)",
-          "sInfoPostFix":    "",
-          "sInfoThousands":  ",",
-          "sLengthMenu":     "نمایش _MENU_ رکورد",
-          "sLoadingRecords": "در حال بارگزاری...",
-          "sProcessing":     "در حال پردازش...",
-          "sSearch":         "جستجو:",
-          "sZeroRecords":    "رکوردی با این مشخصات پیدا نشد",
-          "oPaginate": {
-            "sFirst":    "ابتدا",
-            "sLast":     "انتها",
-            "sNext":     "بعدی",
-            "sPrevious": "قبلی"
-          },
-          "oAria": {
-            "sSortAscending":  ": فعال سازی نمایش به صورت صعودی",
-            "sSortDescending": ": فعال سازی نمایش به صورت نزولی"
-          }
-        },
-      });
+    $(document).on('click', '.newComplaint', function(e) {
+      var inst = $('[data-remodal-id=createModal]').remodal();
+      $('[data-remodal-id=createModal]').find('#Consignment').val('');
       inst.open();
-      $('p').trunk8({
-        fill: '&hellip; <a id="read-more" href="#">بیشتر</a>'
-      });
-    }
-  });
- });
-  $(document).on('closing', '[data-remodal-id=modal]', function (e) {
-   $( "#modalTable" ).html('');
- });
-  $(document).on('change', '.level', function (e) {
-    $btn=$(this);
-    $id=$(this).attr('name');
-    $level=jQuery(this).val();
-    $con=$(this).parent().parent().find('.consignment:first').text();
-    $.ajax({
-      method: "GET",
-      url: "<?php echo e(URL::to('/ChangeLevel')); ?>",
-      data: {
-        id: $id,
-        level:$level
-      },
-      success: function(data){
-        toastr.success('بارنامه '+": "+$con, 'وضعیت شکایت تغیر پیدا کرد', {timeOut: 7000});
-      
+      $('#historyContainer').hide();
+    });
+    $(document).on('click', '.newComplaintSpc', function(e) {
+      var inst = $('[data-remodal-id=createModal]').remodal();
+      $('[data-remodal-id=createModal]').find('#Consignment').val($(this).attr('value'));
+      inst.open();
+      $('#historyContainer').hide();
+
+    });
+    $(document).on('click', '.history', function(e) {
+     $id= $(this).attr('value') ;
+     $globHistory=$id;
+     $globBtn=$(this).find('.countOfRecords');
+     $.ajax({
+       method: "GET",
+       url: "<?php echo e(URL::to('/ComplaintHistory')); ?>",
+       data: {
+         id: $id
+       },
+       success: function(data){
+        var inst = $('[data-remodal-id=modal]').remodal();
+        $( "#modalTable" ).append(data);
+        $('#selConsignment').text($id);
+        historyTable = $('#history').DataTable({
+          aaSorting: [[6, 'desc']],
+          "pageLength": 9,
+          "language": {
+            "sEmptyTable":     "هیچ داده ای در جدول وجود ندارد",
+            "sInfo":           "نمایش _START_ تا _END_ از _TOTAL_ رکورد",
+            "sInfoEmpty":      "نمایش 0 تا 0 از 0 رکورد",
+            "sInfoFiltered":   "(فیلتر شده از _MAX_ رکورد)",
+            "sInfoPostFix":    "",
+            "sInfoThousands":  ",",
+            "sLengthMenu":     "نمایش _MENU_ رکورد",
+            "sLoadingRecords": "در حال بارگزاری...",
+            "sProcessing":     "در حال پردازش...",
+            "sSearch":         "جستجو:",
+            "sZeroRecords":    "رکوردی با این مشخصات پیدا نشد",
+            "oPaginate": {
+              "sFirst":    "ابتدا",
+              "sLast":     "انتها",
+              "sNext":     "بعدی",
+              "sPrevious": "قبلی"
+            },
+            "oAria": {
+              "sSortAscending":  ": فعال سازی نمایش به صورت صعودی",
+              "sSortDescending": ": فعال سازی نمایش به صورت نزولی"
+            }
+          },
+        });
+        inst.open();
         $('p').trunk8({
           fill: '&hellip; <a id="read-more" href="#">بیشتر</a>'
         });
       }
     });
-  });
-  $('[data-remodal-id=modal]').remodal();
-  $('#newTrack').on('click', function(e){
-   e.preventDefault();
-   $('#laoderImage').show();
-   var consignment_no= $('[data-remodal-id=createModal]').find('#Consignment').val();
-   $("#historyContainer").attr("src", "http://portal.parschapar.local/following.php?tracking="+consignment_no);
-   $('#historyContainer').load(function(){
-     $('#historyContainer').show();
-     $('#laoderImage').hide();
    });
- });
+    $(document).on('closing', '[data-remodal-id=modal]', function (e) {
+     $( "#modalTable" ).html('');
+   });
+    $(document).on('change', '.level', function (e) {
+      $btn=$(this);
+      $id=$(this).attr('name');
+      $level=jQuery(this).val();
+      $con=$(this).parent().parent().find('.consignment:first').text();
+      $.ajax({
+        method: "GET",
+        url: "<?php echo e(URL::to('/ChangeLevel')); ?>",
+        data: {
+          id: $id,
+          level:$level
+        },
+        success: function(data){
+          toastr.success('بارنامه '+": "+$con, 'وضعیت شکایت تغیر پیدا کرد', {timeOut: 7000});
+          
+          $('p').trunk8({
+            fill: '&hellip; <a id="read-more" href="#">بیشتر</a>'
+          });
+        }
+      });
+    });
+    $('[data-remodal-id=modal]').remodal();
+    $('#newTrack').on('click', function(e){
+     e.preventDefault();
+     $('#laoderImage').show();
+     var consignment_no= $('[data-remodal-id=createModal]').find('#Consignment').val();
+     $("#historyContainer").attr("src", "http://portal.parschapar.local/following.php?tracking="+consignment_no);
+     $('#historyContainer').load(function(){
+       $('#historyContainer').show();
+       $('#laoderImage').hide();
+     });
+   });
+  });
 });
- });
 </script>
 
 <?php $__env->stopSection(); ?>
