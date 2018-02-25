@@ -7,10 +7,9 @@
   <link rel="stylesheet" href="<?php echo e(asset('css/Style.css')); ?>">
   <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="../../../plugins/datatables/dataTables.bootstrap.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remodal/1.1.1/remodal.css" integrity="sha256-e8D8laFfmKxErx7NbvjaJYUEpv9LN8qgeXQj0DvLd+g=" crossorigin="anonymous" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remodal/1.1.1/remodal.css" integrity="sha256-e8D8laFfmKxErx7NbvjaJYUEpv9LN8qgeXQj0DvLd+g=" crossorigin="anonymous" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remodal/1.1.1/remodal-default-theme.min.css" integrity="sha256-iJlvlQFv31232zI/zrsL/jbuubLWWr/Bv99d+XfaC7Y=" crossorigin="anonymous" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" integrity="sha256-ENFZrbVzylNbgnXx0n3I1g//2WeO47XxoPe0vkp3NC8=" crossorigin="anonymous" />
+  <link rel="stylesheet" href="<?php echo e(asset('css/remodal.css')); ?>"/>
+  <link rel="stylesheet" href="<?php echo e(asset('css/remodal-default-theme.min.css')); ?>" />
+  <link rel="stylesheet" href="<?php echo e(asset('css/toastr.min.css')); ?>"  />
 
 </head>
 <body style="direction: ltr;margin:20px;">
@@ -125,13 +124,13 @@
         <!-- jQuery 2.2.0 -->
         <script src="../plugins/jQuery/jQuery-2.2.0.min.js"></script>
         <!-- jQuery UI 1.11.4 -->
-        <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+        <script src="<?php echo e(asset('js/jquery-ui.min.js')); ?>"></script>
         <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
         <script src="../plugins/datatables/jquery.dataTables.min.js"></script>
         <script src="../plugins/datatables/dataTables.bootstrap.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/remodal/1.1.1/remodal.min.js" integrity="sha256-tR7fz2fCeycqI9/V8mL9nyTc4lI14kg2Qm6zZHuupxE=" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js" integrity="sha256-3blsJd4Hli/7wCQ+bmgXfOdK7p/ZUMtPXY08jmxSSgk=" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/trunk8/1.3.3/trunk8.min.js" integrity="sha256-r2/aTIHrpMiedh+4T1JPMLkQ6VcVDZ8XkRE/7i5piLs=" crossorigin="anonymous"></script>
+        <script src="<?php echo e(asset('js/remodal.min.js')); ?>" ></script>
+        <script src="<?php echo e(asset('js/toastr.min.js')); ?>"></script>
+        <script src="<?php echo e(asset('js/trunk8.min.js')); ?>"></script>
         <script >
         $( document ).ready(function() {
           $('p').trunk8({

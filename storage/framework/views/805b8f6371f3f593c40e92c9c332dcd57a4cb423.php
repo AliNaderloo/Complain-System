@@ -113,6 +113,7 @@
   $(document).ready(function() {
     var  MainDataTable =  $('#DataTable').DataTable({
      processing: true,
+     serverSide: true,
      dataType: "json",
       aaSorting: [[6, 'desc']],
    "language": {
