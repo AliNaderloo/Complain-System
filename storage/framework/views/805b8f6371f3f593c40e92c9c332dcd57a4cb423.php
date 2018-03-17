@@ -166,9 +166,9 @@
             break;
           }
           var Registrar="";
-          if (json.data.fld_Registrar==1) {
+          if (json.data[i].fld_Registrar=="1") {
             Registrar="مشتری";
-          }else{
+          }else if(json.data[i].fld_Registrar=="2"){
              Registrar="نماینده";
           }
           return_data.push({
