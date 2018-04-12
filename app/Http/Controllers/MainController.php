@@ -109,16 +109,9 @@ class MainController extends Controller
 		return datatables()->of($records)->addColumn('options', '')->addIndexColumn()->toJson();*/
 	}
 	public function allComplaint(Request $req){
-		$createSpcCom= $req->input('createSpcCom');
 		$Complaints_Subjects=Complaints_Subjects::where('fld_Suspend', '=',false)->get();
-		$Complaints = DB::table('tbl_complaints')->whereRaw('tbl_complaints.created_at in (select max(created_at) from tbl_complaints where tbl_complaints.fld_Suspend = false group by (fld_Consignment))')->join('tbl_complaints_subjects', 'tbl_complaints.fld_Subject', '=', 'tbl_complaints_subjects.fld_Id')->orderBy('tbl_complaints.created_at','desc')->select('tbl_complaints.*', 'tbl_complaints_subjects.fld_Complaints_Subjects')->get();
-		foreach ($Complaints as $Complaint) {
-			$Complaintcount=Complaints::where([['fld_Consignment','=',$Complaint->fld_Consignment],['fld_Suspend','=',false]])->count();
-			$Complaint->count=$Complaintcount;
-		}
 		$user=session('user');
-		$table = new DataTable2(array('شماره بارنامه', 'موضوع', 'توضیحات','از طرف',' توسط','تاریخ ثبت','مرحله'),$Complaints);
-		return view('showAllComplaint')->with('Table', $table->Data())->with('user',$user)->with('Subjects',$Complaints_Subjects)->with('createSpcCom',$createSpcCom);;
+		return view('showAllComplaint')->with('user',$user)->with('Subjects',$Complaints_Subjects);
 	}
 	public function allSpcComplaint($id){
 		$userId=$_GET['userId'];

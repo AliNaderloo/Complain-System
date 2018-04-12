@@ -74,7 +74,7 @@
         <span style="vertical-align: -2px;" class="glyphicon glyphicon-search"></span> پیگیری
       </button>
       <label for="Consignment" class="formHeader">: شماره بارنامه</label>
-      <input autocomplete="off" style="direction:ltr"  type="text" class="form-control" name="Consignment" id="Consignment" @if($createSpcCom!=false) value="{{$createSpcCom}}"  @endif placeholder="بارنامه">
+      <input autocomplete="off" style="direction:ltr"  type="text" class="form-control" name="Consignment" id="Consignment" placeholder="بارنامه">
     </div>
     <div class="form-group">
 
@@ -209,10 +209,7 @@
   });             
 
     
-    @if($createSpcCom!=false) 
-    var instt = $('[data-remodal-id=createModal]').remodal();
-    instt.open();
-    @endif 
+  
     $(function () {
      var $globBtn;
      String.prototype.toEnDigit = function() {

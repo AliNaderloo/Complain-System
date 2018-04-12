@@ -74,7 +74,7 @@
         <span style="vertical-align: -2px;" class="glyphicon glyphicon-search"></span> پیگیری
       </button>
       <label for="Consignment" class="formHeader">: شماره بارنامه</label>
-      <input autocomplete="off" style="direction:ltr"  type="text" class="form-control" name="Consignment" id="Consignment" <?php if($createSpcCom!=false): ?> value="<?php echo e($createSpcCom); ?>"  <?php endif; ?> placeholder="بارنامه">
+      <input autocomplete="off" style="direction:ltr"  type="text" class="form-control" name="Consignment" id="Consignment" placeholder="بارنامه">
     </div>
     <div class="form-group">
 
@@ -166,9 +166,9 @@
             break;
           }
           var Registrar="";
-          if (json.data[i].fld_Registrar=="1") {
+          if (json.data[i].fld_Registrar=="2") {
             Registrar="مشتری";
-          }else if(json.data[i].fld_Registrar=="2"){
+          }else if(json.data[i].fld_Registrar=="1"){
              Registrar="نماینده";
           }
           return_data.push({
@@ -209,10 +209,7 @@
   });             
 
     
-    <?php if($createSpcCom!=false): ?> 
-    var instt = $('[data-remodal-id=createModal]').remodal();
-    instt.open();
-    <?php endif; ?> 
+  
     $(function () {
      var $globBtn;
      String.prototype.toEnDigit = function() {

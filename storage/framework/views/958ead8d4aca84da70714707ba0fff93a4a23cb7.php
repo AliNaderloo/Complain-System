@@ -49,9 +49,7 @@
 
         </th>
         <th>
-        <button  value="<?php echo e($complaints->fld_Id); ?>" style="background-color: tomato;color: white" type="button" class="btn btn-default btn-sm deleteComplainBtn">
-        <span class="glyphicon glyphicon-trash"></span> حذف
-        </button>
+        <!-- DltBtnPlace -->
         </th>
         </tr> 
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
