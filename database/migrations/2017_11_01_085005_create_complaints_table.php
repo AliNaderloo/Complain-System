@@ -17,7 +17,7 @@ class CreateComplaintsTable extends Migration
             $table->increments('fld_Id');
             $table->integer('fld_Subject')->index();
             $table->string('fld_Consignment',17);
-            $table->longText('fld_Description');
+            $table->longText('fld_Description')->nullable();
             $table->integer('fld_Registrar');
             $table->integer('fld_User')->index();
             $table->text('fld_User_Name');
