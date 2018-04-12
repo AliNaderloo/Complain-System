@@ -270,10 +270,7 @@
       toastr.error('! شماره بارنامه کمتر از ۱۷ رقم است ');
       return 0;
     }
-    if (!$.trim($("#Description").val())) {
-      toastr.error('! توضیحات را وارد کنید');
-      return 0;
-    }
+ 
 
     if ($("input[name='Registrar']:checked").val()==undefined) {
       toastr.error('! نماینده یا مشتری را مشخص نمایید ');

@@ -10,7 +10,6 @@
   <link rel="stylesheet" href="{{ asset('css/remodal.css') }}"/>
   <link rel="stylesheet" href="{{ asset('css/remodal-default-theme.min.css') }}" />
   <link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}"  />
-
 </head>
 <body style="direction: ltr;margin:20px;">
   <table id="DataTable" style="font-size: 14px" class="table direction table-hover dataTable" role="grid" >
@@ -199,10 +198,6 @@
            e.preventDefault();
            if ($('#Consignment').val().length < 17) {
             toastr.error('! شماره بارنامه کمتر از ۱۷ رقم است ');
-            return 0;
-          }
-          if (!$.trim($("#Description").val())) {
-            toastr.error('! توضیحات را وارد کنید');
             return 0;
           }
 
