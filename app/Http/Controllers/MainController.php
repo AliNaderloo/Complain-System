@@ -133,7 +133,7 @@ class MainController extends Controller
 		return view('addComplaint')->with('Complaints',$Complaints);
 	}
 	public function newComplaint( Request $req){
-		if (!empty($req->input('Complaints'))&&!empty($req->input('Consignment'))&&!empty($req->input('Description'))&&!empty($req->input('Registrar'))) {
+		if (!empty($req->input('Complaints'))&&!empty($req->input('Consignment'))&&!empty($req->input('Registrar'))) {
 			$complaint=new Complaints;
 			$user=session('user');
 			$user_name=session('name');	
