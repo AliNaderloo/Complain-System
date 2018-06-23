@@ -269,9 +269,7 @@
                   $('[data-remodal-id=createModal] textarea').val('');
                   $('[data-remodal-id=createModal] input[type="radio"]').prop('checked', false);
                   toastr.success('شکایت با موفقیت ثبت شد', {timeOut: 7000});
-                  $('p').trunk8({
-                    fill: '&hellip; <a id="read-more" href="#">بیشتر</a>'
-                  });
+                  location.reload();
                 }
               });
             }
