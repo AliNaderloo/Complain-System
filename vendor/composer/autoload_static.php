@@ -345,6 +345,7 @@ class ComposerStaticInite95d5cf51a7a16fa4bfca53b0a59d672
         'App\\Classes\\DataTable2' => __DIR__ . '/../..' . '/app/Classes/DataTable2.php',
         'App\\Classes\\Modal' => __DIR__ . '/../..' . '/app/Classes/Modal.php',
         'App\\Complaints' => __DIR__ . '/../..' . '/app/Complaints.php',
+        'App\\Complaints_Category' => __DIR__ . '/../..' . '/app/Complaints_Category.php',
         'App\\Complaints_Subjects' => __DIR__ . '/../..' . '/app/Complaints_Subjects.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',

@@ -13,6 +13,10 @@ class Complaints extends Model
 	{
 		return $this->hasOne('App\Complaints_Subjects','fld_Id','fld_Subject'); 
 	}	
+	public function getCat()
+	{
+		return $this->hasOne('App\Complaints_Category','fld_Id','fld_Cat_Name'); 
+	}	
 	public function getUser()
 	{
 		return $this->hasOne('App\User','fld_Id','fld_User'); 

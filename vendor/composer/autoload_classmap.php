@@ -10,6 +10,7 @@ return array(
     'App\\Classes\\DataTable2' => $baseDir . '/app/Classes/DataTable2.php',
     'App\\Classes\\Modal' => $baseDir . '/app/Classes/Modal.php',
     'App\\Complaints' => $baseDir . '/app/Complaints.php',
+    'App\\Complaints_Category' => $baseDir . '/app/Complaints_Category.php',
     'App\\Complaints_Subjects' => $baseDir . '/app/Complaints_Subjects.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',

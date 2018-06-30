@@ -8,6 +8,7 @@
        <th> توسط</th>
        <th>تاریخ ثبت</th>
        <th>مرحله</th>
+       <th>دسته</th>
        <th>اقدامات</th>
      </tr>
    </thead>
@@ -36,6 +37,13 @@
                <option @if ($complaints->fld_Level==3) selected="true" @endif value="3"> به اتمام رسیده</option>
              </select>
            </th>
+           <th>
+            <span style="display: none;">{{$complaints->fld_Level}}</span>
+            <select style="background-color:#3c8dbc;color: white" class="form-control cat" name="{{$complaints->fld_Id}}" >
+             <option @if ($complaints->fld_Cat==1) selected="true" @endif value="1">پیگیری</option>
+             <option @if ($complaints->fld_Cat==2) selected="true" @endif value="2">حقوقی</option>
+           </select>
+         </th>
      <!--      <th>
             <a  href="/Complain/$complaints->fld_Id" target="_blank">
               <div >

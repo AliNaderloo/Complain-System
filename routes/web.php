@@ -18,10 +18,13 @@ Route::get('newComplaint', 'MainController@newComplaint');
 Route::get('/Add', 'MainController@addComplaint');
 Route::get('/', 'MainController@setUser');
 Route::get('/All', 'MainController@allComplaint')->name('allComplaint');
+Route::get('/Cat/{id}', 'MainController@allCatComplaint')->name('allCatComplaint');
 Route::get('/SpcAll/{id}', 'MainController@allSpcComplaint')->name('allSpcComplaint');
 	//Route::get('Complain/{id}', 'MainController@showComplaint');
 	//Route::post('editComplaint', 'MainController@editComplaint');
 Route::get('ChangeLevel', 'MainController@changeLevel');
+Route::get('ChangeCat', 'MainController@changeCat');
+
 Route::get('Subjects', 'MainController@allSubject');
 Route::get('ComplainSubject/{id}', 'MainController@ComplainSubject');
 Route::get('EditSubject', 'MainController@editComplaintSubject');
@@ -36,5 +39,6 @@ Route::get('RemoveComplaint','MainController@removeComplaint');
 Route::get('ComplaintHistory','MainController@complaintHistory');
 Route::get('/HasComplain/{id}', 'MainController@hasComplain');
 Route::get('DataTable','MainController@dataTable');
+Route::get('DataTableCat/{id}','MainController@dataTableCat');
 
 	//});

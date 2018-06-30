@@ -7,29 +7,29 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
-  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css')}}">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
   <!-- Ionicons -->
   <link rel="stylesheet" href="{{ asset('css/ionicons.min.css') }}">
   <!-- Theme style -->
-  <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="{{ asset('dist/css/AdminLTE.min.css')}}">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
    folder instead of downloading all of them to reduce the load. -->
-   <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+   <link rel="stylesheet" href="{{ asset('dist/css/skins/_all-skins.min.css')}}">
    <!-- iCheck -->
-   <link rel="stylesheet" href="plugins/iCheck/flat/blue.css">
+   <link rel="stylesheet" href="{{ asset('plugins/iCheck/flat/blue.css')}}">
 
    <!-- jvectormap -->
-   <link rel="stylesheet" href="plugins/jvectormap/jquery-jvectormap-1.2.2.css">
+   <link rel="stylesheet" href="{{ asset('plugins/jvectormap/jquery-jvectormap-1.2.2.css')}}">
    <!-- Date Picker -->
-   <link rel="stylesheet" href="plugins/datepicker/datepicker3.css">
+   <link rel="stylesheet" href="{{ asset('plugins/datepicker/datepicker3.css')}}">
    <!-- Daterange picker -->
-   <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker-bs3.css">
+   <link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker-bs3.css')}}">
    <!-- bootstrap wysihtml5 - text editor -->
-   <link rel="stylesheet" href="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+   <link rel="stylesheet" href="{{ asset('plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}">
    <!-- DataTables -->
-   <link rel="stylesheet" href="../../plugins/datatables/dataTables.bootstrap.css">
+   <link rel="stylesheet" href="{{ asset('plugins/datatables/dataTables.bootstrap.css')}}">
    <link rel="stylesheet" href="{{ asset('css/remodal.css') }}" />
      <link rel="stylesheet" href="{{ asset('css/remodal-default-theme.css') }}" />
    <link rel="stylesheet" href="{{ asset('css/JqueryMobile.css') }}" />
@@ -96,7 +96,7 @@
                     <li>
                       <a href="#">
                         <div class="pull-left">
-                          <img src="dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
+                          <img src="{{ asset('dist/img/user3-128x128.jpg')}}" class="img-circle" alt="User Image">
                         </div>
                         <h4>
                           AdminLTE Design Team
@@ -108,7 +108,7 @@
                     <li>
                       <a href="#">
                         <div class="pull-left">
-                          <img src="dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
+                          <img src="{{ asset('dist/img/user4-128x128.jpg')}}" class="img-circle" alt="User Image">
                         </div>
                         <h4>
                           Developers
@@ -120,7 +120,7 @@
                     <li>
                       <a href="#">
                         <div class="pull-left">
-                          <img src="dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
+                          <img src="{{ asset('dist/img/user3-128x128.jpg')}}" class="img-circle" alt="User Image">
                         </div>
                         <h4>
                           Sales Department
@@ -132,7 +132,7 @@
                     <li>
                       <a href="#">
                         <div class="pull-left">
-                          <img src="dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
+                          <img src="{{ asset('dist/img/user4-128x128.jpg')}}" class="img-circle" alt="User Image">
                         </div>
                         <h4>
                           Reviewers
@@ -572,31 +572,31 @@
   $.widget.bridge('uibutton', $.ui.button);
 </script>
 <!-- Bootstrap 3.3.6 -->
-<script src="bootstrap/js/bootstrap.min.js"></script>
+<script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('js/trunk8.min.js') }}"></script>
 <!-- Sparkline -->
-<script src="plugins/sparkline/jquery.sparkline.min.js"></script>
+<script src="{{ asset('plugins/sparkline/jquery.sparkline.min.js')}}"></script>
 <!-- jvectormap -->
-<script src="plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
-<script src="plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+<script src="{{ asset('plugins/jvectormap/jquery-jvectormap-1.2.2.min.js')}}"></script>
+<script src="{{ asset('plugins/jvectormap/jquery-jvectormap-world-mill-en.js')}}"></script>
 <!-- jQuery Knob Chart -->
-<script src="plugins/knob/jquery.knob.js"></script>
+<script src="{{ asset('plugins/knob/jquery.knob.js')}}"></script>
 <!-- daterangepicker -->
 <script src="{{ asset('js/moment.min.js') }}"></script>
-<script src="plugins/daterangepicker/daterangepicker.js"></script>
+<script src="{{ asset('plugins/daterangepicker/daterangepicker.js')}}"></script>
 <!-- datepicker -->
-<script src="plugins/datepicker/bootstrap-datepicker.js"></script>
+<script src="{{ asset('plugins/datepicker/bootstrap-datepicker.js')}}"></script>
 <!-- Bootstrap WYSIHTML5 -->
-<script src="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+<script src="{{ asset('plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js')}}"></script>
 <!-- Slimscroll -->
-<script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<script src="{{ asset('plugins/slimScroll/jquery.slimscroll.min.js')}}"></script>
 <!-- FastClick -->
-<script src="plugins/fastclick/fastclick.js"></script>
+<script src="{{ asset('plugins/fastclick/fastclick.js')}}"></script>
 <!-- AdminLTE App -->
-<script src="dist/js/app.min.js"></script>
+<script src="{{ asset('dist/js/app.min.js')}}"></script>
 <!-- DataTables -->
-<script src="plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+<script src="{{ asset('plugins/datatables/jquery.dataTables.min.js')}}"></script>
+<script src="{{ asset('plugins/datatables/dataTables.bootstrap.min.js')}}"></script>
 <script src="{{ asset('js/remodal.min.js') }}" ></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{ asset('js/toastr.min.js') }}" ></script>

@@ -12,8 +12,12 @@ table,tr, th, td {
   margin: 0 15px;
 }
 .level{
-.background-color:#3c8dbc;color: white; background-color:#3c8dbc;color: white;
+background-color:#3c8dbc;color: white; 
 }
+.cat{
+  font-size: 15px;
+  background-color:#134f61;color: white;
+  }
 p{
   word-break: break-all;
 }

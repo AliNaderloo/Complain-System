@@ -8,6 +8,7 @@
        <th> توسط</th>
        <th>تاریخ ثبت</th>
        <th>مرحله</th>
+       <th>دسته</th>
        <th>اقدامات</th>
      </tr>
    </thead>
@@ -36,6 +37,13 @@
                <option <?php if($complaints->fld_Level==3): ?> selected="true" <?php endif; ?> value="3"> به اتمام رسیده</option>
              </select>
            </th>
+           <th>
+            <span style="display: none;"><?php echo e($complaints->fld_Level); ?></span>
+            <select style="background-color:#3c8dbc;color: white" class="form-control cat" name="<?php echo e($complaints->fld_Id); ?>" >
+             <option <?php if($complaints->fld_Cat==1): ?> selected="true" <?php endif; ?> value="1">پیگیری</option>
+             <option <?php if($complaints->fld_Cat==2): ?> selected="true" <?php endif; ?> value="2">حقوقی</option>
+           </select>
+         </th>
      <!--      <th>
             <a  href="/Complain/$complaints->fld_Id" target="_blank">
               <div >
@@ -46,9 +54,7 @@
           </a>
         </th> -->
         <th>
-          <button value="<?php echo e($complaints->fld_Id); ?>" style="background-color: tomato;color: white" type="button" class="btn btn-default btn-sm deleteComplainBtn">
-            <span class="glyphicon glyphicon-trash"></span> حذف
-          </button>
+         <!-- Btn Place  -->
         </th>
       </tr> 
       <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

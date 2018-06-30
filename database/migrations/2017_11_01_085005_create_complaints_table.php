@@ -22,6 +22,7 @@ class CreateComplaintsTable extends Migration
             $table->integer('fld_User')->index();
             $table->text('fld_User_Name');
             $table->integer('fld_Level');
+            $table->integer('fld_Cat')->default(1);
             $table->boolean('fld_Suspend')->default(false);
             $table->timestamps();
         });
